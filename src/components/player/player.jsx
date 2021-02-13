@@ -1,12 +1,15 @@
 import React from "react";
+import propTypes from "prop-types";
 
-const Player = () => {
+const Player = ({film}) => {
+  const {poster_image: posterImage, video_link: videoLink} = film;
+
   return (
     <div className="player">
       <video
-        src="#"
+        src={videoLink}
         className="player__video"
-        poster="img/player-poster.jpg"
+        poster={posterImage}
       ></video>
 
       <button type="button" className="player__exit">
@@ -47,6 +50,10 @@ const Player = () => {
       </div>
     </div>
   );
+};
+
+Player.propTypes = {
+  film: propTypes.object.isRequred
 };
 
 export default Player;
