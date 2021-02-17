@@ -11,7 +11,7 @@ import Player from "../player/player";
 import PageNotFound from "../page-not-found/page-not-found";
 
 const App = ({films}) => {
-  const firstFilm = films[0];
+
   return (
     <BrowserRouter>
       <Switch>
@@ -22,15 +22,15 @@ const App = ({films}) => {
         <Route path="/mylist" exact render={() => <MyList films={films} />} />
         <Route path="/films/:id" exact render={({match}) => {
           const id = match.params.id;
-          return <Film films={films} film={firstFilm} id={id} />;
+          return <Film films={films} id={id} />;
         }} />
         <Route path="/films/:id/review" exact render={({match}) => {
           const id = match.params.id;
-          return <AddReview film={firstFilm} id={id} />;
+          return <AddReview id={id} />;
         }} />
         <Route path="/player/:id" exact render={({match}) => {
           const id = match.params.id;
-          return <Player film={firstFilm} id={id} />;
+          return <Player id={id} />;
         }} />
         <Route path="*" render={() => <PageNotFound />} />
       </Switch>

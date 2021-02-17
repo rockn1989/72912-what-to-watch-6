@@ -1,10 +1,12 @@
 import React from "react";
-import {Link} from 'react-router-dom';
 import propTypes from "prop-types";
 import AddReviewForm from '../add-review-form/add-review-form';
+import Header from '../header/header';
+import BreadCrumbs from '../breadcrumbs/breadcrumbs';
+import films from "../../mocks/films";
 
-
-const AddReview = ({film, id}) => {
+const AddReview = ({id}) => {
+  const [film] = films.filter((filmItem) => filmItem.id === parseInt(id, 10));
   const {name, posterImage, backgroundImage} = film;
 
   return (
@@ -16,32 +18,9 @@ const AddReview = ({film, id}) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header">
-          <div className="logo">
-            <Link to="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
-
-          <nav className="breadcrumbs">
-            <ul className="breadcrumbs__list">
-              <li className="breadcrumbs__item">
-                <Link to={{pathname: `/films/${id}`}} className="breadcrumbs__link">{name}</Link>
-              </li>
-              <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
-              </li>
-            </ul>
-          </nav>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
-        </header>
+        <Header>
+          <BreadCrumbs id={id} name={name} />
+        </Header>
 
         <div className="movie-card__poster movie-card__poster--small">
           <img src={posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
@@ -54,7 +33,6 @@ const AddReview = ({film, id}) => {
 };
 
 AddReview.propTypes = {
-  film: propTypes.object.isRequired,
   id: propTypes.string.isRequired
 };
 

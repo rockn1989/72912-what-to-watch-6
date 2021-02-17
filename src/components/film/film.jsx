@@ -1,11 +1,13 @@
 import React from "react";
 import {Link, useHistory} from 'react-router-dom';
 import propTypes from "prop-types";
-import Card from '../card';
+import Header from '../header/header';
+import CardList from '../card-list/card-list';
 
-const Film = ({films, film, id}) => {
+const Film = ({films, id}) => {
+  const [film] = films.filter((filmItem) => filmItem.id === parseInt(id, 10));
+  const similarMovies = films.filter((filmItem) => filmItem.genre === film.genre);
   const {name, realeased, gener, rating, description, scoresCount, director, starring} = film;
-  const similarMovies = films.filter((el) => el.genre === film.genre);
   const history = useHistory();
 
   return (
@@ -21,26 +23,7 @@ const Film = ({films, film, id}) => {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header movie-card__head">
-            <div className="logo">
-              <Link to="/" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img
-                  src="img/avatar.jpg"
-                  alt="User avatar"
-                  width="63"
-                  height="63"
-                />
-              </div>
-            </div>
-          </header>
+          <Header className={`movie-card__head`}/>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -54,6 +37,9 @@ const Film = ({films, film, id}) => {
                 <button
                   className="btn btn--play movie-card__button"
                   type="button"
+                  onClick={() => {
+                    history.push(`/player/${id}`);
+                  }}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -148,9 +134,7 @@ const Film = ({films, film, id}) => {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__movies-list">
-            {similarMovies.map((card, idx) => {
-              return <Card key={`${card.name}_${idx}`} id={card.id} img={card.posterImage} title={card.name} />;
-            })}
+            <CardList filmsList={similarMovies} />
           </div>
         </section>
 
@@ -174,7 +158,6 @@ const Film = ({films, film, id}) => {
 
 Film.propTypes = {
   films: propTypes.array.isRequired,
-  film: propTypes.object.isRequired,
   id: propTypes.string.isRequired
 };
 
