@@ -1,8 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
-import films from "../../mocks/films";
 
-const Player = ({id}) => {
+const Player = ({films, id}) => {
   const [film] = films.filter((filmItem) => filmItem.id === parseInt(id, 10));
   const {poster_image: posterImage, video_link: videoLink} = film;
 
@@ -55,6 +54,7 @@ const Player = ({id}) => {
 };
 
 Player.propTypes = {
+  films: propTypes.array,
   id: propTypes.string.isRequired
 };
 

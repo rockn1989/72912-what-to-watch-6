@@ -3,9 +3,8 @@ import propTypes from "prop-types";
 import AddReviewForm from '../add-review-form/add-review-form';
 import Header from '../header/header';
 import BreadCrumbs from '../breadcrumbs/breadcrumbs';
-import films from "../../mocks/films";
 
-const AddReview = ({id}) => {
+const AddReview = ({films, id}) => {
   const [film] = films.filter((filmItem) => filmItem.id === parseInt(id, 10));
   const {name, posterImage, backgroundImage} = film;
 
@@ -33,6 +32,7 @@ const AddReview = ({id}) => {
 };
 
 AddReview.propTypes = {
+  films: propTypes.array,
   id: propTypes.string.isRequired
 };
 

@@ -26,11 +26,11 @@ const App = ({films}) => {
         }} />
         <Route path="/films/:id/review" exact render={({match}) => {
           const id = match.params.id;
-          return <AddReview id={id} />;
+          return <AddReview films={films} id={id} />;
         }} />
         <Route path="/player/:id" exact render={({match}) => {
           const id = match.params.id;
-          return <Player id={id} />;
+          return <Player films={films} id={id} />;
         }} />
         <Route path="*" render={() => <PageNotFound />} />
       </Switch>
