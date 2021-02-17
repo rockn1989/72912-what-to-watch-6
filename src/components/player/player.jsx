@@ -1,12 +1,16 @@
 import React from "react";
+import propTypes from "prop-types";
 
-const Player = () => {
+const Player = ({films, id}) => {
+  const [film] = films.filter((filmItem) => filmItem.id === parseInt(id, 10));
+  const {poster_image: posterImage, video_link: videoLink} = film;
+
   return (
     <div className="player">
       <video
-        src="#"
+        src={videoLink}
         className="player__video"
-        poster="img/player-poster.jpg"
+        poster={posterImage}
       ></video>
 
       <button type="button" className="player__exit">
@@ -47,6 +51,11 @@ const Player = () => {
       </div>
     </div>
   );
+};
+
+Player.propTypes = {
+  films: propTypes.array,
+  id: propTypes.string.isRequired
 };
 
 export default Player;

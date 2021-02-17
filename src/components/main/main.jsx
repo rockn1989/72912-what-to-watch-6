@@ -1,8 +1,12 @@
 import React from "react";
-import Card from "../card";
+import CardList from "../card-list/card-list";
 import propTypes from "prop-types";
+import {useHistory} from "react-router-dom";
+import Header from '../header/header';
 
-const Welcome = ({title, gener, date}) => {
+const Welcome = ({films}) => {
+  const history = useHistory();
+
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -15,26 +19,7 @@ const Welcome = ({title, gener, date}) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img
-                src="img/avatar.jpg"
-                alt="User avatar"
-                width="63"
-                height="63"
-              />
-            </div>
-          </div>
-        </header>
+        <Header />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -48,10 +33,10 @@ const Welcome = ({title, gener, date}) => {
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
+              <h2 className="movie-card__title">Test name</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{gener}</span>
-                <span className="movie-card__year">{date}</span>
+                <span className="movie-card__genre">Test name</span>
+                <span className="movie-card__year">Test name</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -67,6 +52,9 @@ const Welcome = ({title, gener, date}) => {
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
+                  onClick={() => {
+                    history.push(`/mylist`);
+                  }}
                 >
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
@@ -137,9 +125,7 @@ const Welcome = ({title, gener, date}) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {new Array(20).fill(``).map((el, idx) => (
-              <Card key={`el_${idx}`} />
-            ))}
+            <CardList filmsList={films} />
           </div>
 
           <div className="catalog__more">
@@ -168,9 +154,7 @@ const Welcome = ({title, gener, date}) => {
 };
 
 Welcome.propTypes = {
-  title: propTypes.string.isRequired,
-  gener: propTypes.string.isRequired,
-  date: propTypes.number.isRequired,
+  films: propTypes.arrayOf(propTypes.object).isRequired
 };
 
 export default Welcome;
