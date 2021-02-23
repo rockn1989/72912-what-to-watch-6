@@ -5,7 +5,7 @@ import Card from '../card';
 
 const CardList = ({filmsList}) => {
 
-  const [activeCard, setActiveCard] = useState();
+  const [activeCard, setActiveCard] = useState(null);
 
   const films = filmsList.slice(0, 8);
 
@@ -13,9 +13,9 @@ const CardList = ({filmsList}) => {
     setActiveCard(id);
   };
 
-  const cards = films.map(({name, id, posterImage}, idx) => {
-    const isActive = id === activeCard ? true : false;
-    return <Card key={`${name}_${idx}`} onHoverHandler={onHoverHandler} id={id} img={posterImage} title={name} isActive={isActive} />;
+  const cards = films.map(({name, id, posterImage, previewVideolink}, idx) => {
+    const isActive = id === activeCard;
+    return <Card key={`${name}_${idx}`} onHoverHandler={onHoverHandler} id={id} img={posterImage} previewVideolink={previewVideolink} title={name} isActive={isActive} />;
   });
 
   return cards;
