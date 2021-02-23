@@ -14,7 +14,7 @@ const CardList = ({filmsList}) => {
   };
 
   const cards = films.map(({name, id, posterImage, previewVideolink}, idx) => {
-    const isActive = id === activeCard ? true : false;
+    const isActive = id === activeCard;
     return <Card key={`${name}_${idx}`} onHoverHandler={onHoverHandler} id={id} img={posterImage} previewVideolink={previewVideolink} title={name} isActive={isActive} />;
   });
 
