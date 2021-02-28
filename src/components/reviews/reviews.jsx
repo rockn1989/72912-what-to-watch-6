@@ -3,26 +3,14 @@ import Review from '../review/review';
 import propTypes from "prop-types";
 
 const Reviews = ({reviews}) => {
-  let col = [];
-  const row = [];
-  reviews.forEach((review, idx) => {
 
-    col.push(<Review key={`${review.date}_${idx}`} {...review} />);
-    if (col.length === 3) {
-      row.push(col.slice(0, 3));
-    }
+  const [...rows] = [...[reviews.slice(0, Math.ceil(reviews.length / 2))], ...[reviews.slice(Math.ceil(reviews.length / 2))]];
 
-    if (idx === reviews.length - 1) {
-      row.push(col.slice(3));
-    }
-
-  });
-
-  const post = row.map((rows, idx) => {
+  const post = rows.map((columns, idx) => {
     return (
-      <div key={`${rows}_${idx}`} className="movie-card__reviews-col">
-        {rows.map((colms) => {
-          return colms;
+      <div key={`${columns}_${idx}`} className="movie-card__reviews-col">
+        {columns.map((review) => {
+          return <Review key={`${review.date}_${idx}`} {...review} />;
         })}
       </div>
     );

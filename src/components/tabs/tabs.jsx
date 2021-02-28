@@ -23,11 +23,10 @@ const Tabs = ({tabsTitle, activeTab, onChangeActiveItem, ...props}) => {
         </ul>
       </nav>
       {props.children.map((child, idx) => {
-        if (idx !== activeTab) {
-          return undefined;
+        if (idx === activeTab) {
+          return child;
         }
-
-        return child;
+        return null;
       })}
     </>
   );
