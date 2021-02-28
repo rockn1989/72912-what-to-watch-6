@@ -3,11 +3,18 @@ import {Link, useHistory} from 'react-router-dom';
 import propTypes from "prop-types";
 import Header from '../header/header';
 import CardList from '../card-list/card-list';
+import Tabs from '../tabs/tabs';
+import Overview from '../overview/overview';
+import Details from '../details/details';
+import Reviews from '../reviews/reviews';
+import reviews from '../../mocks/reviews';
+
+const tabsTitle = [`Overview`, `Details`, `Reviews`];
 
 const Film = ({films, id}) => {
   const [film] = films.filter((filmItem) => filmItem.id === parseInt(id, 10));
   const similarMovies = films.filter((filmItem) => filmItem.genre === film.genre);
-  const {name, realeased, gener, rating, description, scoresCount, director, starring} = film;
+  const {name, realeased, gener} = film;
   const history = useHistory();
 
   return (
@@ -76,54 +83,14 @@ const Film = ({films, id}) => {
             </div>
 
             <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">
-                      Overview
-                    </a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">
-                      Details
-                    </a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">
-                      Reviews
-                    </a>
-                  </li>
-                </ul>
-              </nav>
 
-              <div className="movie-rating">
-                <div className="movie-rating__score">{rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">{scoresCount} ratings</span>
-                </p>
-              </div>
+              <Tabs tabsTitle={tabsTitle} {...film}>
+                <Overview {...film}/>
+                <Details {...film}/>
+                <Reviews reviews={reviews}/>
+              </Tabs>
 
-              <div className="movie-card__text">
-                <p>
-                  {description}
-                </p>
 
-                <p className="movie-card__director">
-                  <strong>Director: {director}</strong>
-                </p>
-
-                <p className="movie-card__starring">
-                  <strong>
-                    Starring: {starring.map((acter, idx) => {
-                      if (idx === starring.length - 1) {
-                        return `${acter}`;
-                      }
-                      return `${acter}, `;
-                    })}
-                  </strong>
-                </p>
-              </div>
             </div>
           </div>
         </div>
