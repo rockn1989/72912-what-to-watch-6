@@ -1,36 +1,21 @@
 import React, {useEffect} from 'react';
 import propTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
 
-const GenresList = ({genre, filmsList, setGenres, getFilmsList, filterFilms}) => {
 
+const GenresList = ({genre, filmsList, setGenre, filterFilms}) => {
   const newGenreList = [{genre: `All genres`}, ...filmsList];
 
   const genresName = new Set(newGenreList.map((genreType) => genreType.genre));
 
   const genres = [...genresName].map((genreName, idx) => {
-    const isActive = genreName === genre ? `catalog__genres-item--active` : ``;
-    if (idx === 0) {
-      return (
-        <li key={`${genreName}_${idx}`} className={`catalog__genres-item ${isActive}`}>
-          <a href="#" className="catalog__genres-link" onClick={(evt) => {
-            evt.preventDefault();
-            setGenres(genreName);
-            getFilmsList();
-          }}>
-            {genreName}
-          </a>
-        </li>
-      );
-    }
+    const activeGenreClass = genreName === genre ? `catalog__genres-item--active` : ``;
 
     return (
-      <li key={`${genreName}_${idx}`} className={`catalog__genres-item ${isActive}`}>
+      <li key={`${genreName}_${idx}`} className={`catalog__genres-item ${activeGenreClass}`}>
         <a href="#" className="catalog__genres-link" onClick={(evt) => {
           evt.preventDefault();
-          setGenres(genreName);
-          filterFilms(genreName);
+          setGenre(genreName);
+          filterFilms();
         }}>
           {genreName}
         </a>
@@ -39,7 +24,7 @@ const GenresList = ({genre, filmsList, setGenres, getFilmsList, filterFilms}) =>
   });
 
   useEffect(() => {
-    getFilmsList();
+    filterFilms();
   }, []);
 
   return (
@@ -51,29 +36,9 @@ const GenresList = ({genre, filmsList, setGenres, getFilmsList, filterFilms}) =>
 
 GenresList.propTypes = {
   genre: propTypes.string.isRequired,
-  setGenres: propTypes.func.isRequired,
-  getFilmsList: propTypes.func.isRequired,
+  setGenre: propTypes.func.isRequired,
   filterFilms: propTypes.func.isRequired,
   filmsList: propTypes.array.isRequired
 };
 
-const mapStateToProps = (state) => {
-  return {
-    genre: state.genre,
-    filmsList: state.films
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  setGenres(payload) {
-    dispatch(ActionCreator.setGenres(payload));
-  },
-  getFilmsList() {
-    dispatch(ActionCreator.getFilmsList());
-  },
-  filterFilms() {
-    dispatch(ActionCreator.filterFilms());
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(GenresList);
+export default GenresList;

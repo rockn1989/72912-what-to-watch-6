@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
 import propTypes from 'prop-types';
 
 import Card from '../card';
@@ -26,10 +25,4 @@ CardList.propTypes = {
   filmsList: propTypes.arrayOf(propTypes.object).isRequired
 };
 
-const mapStateToProps = (state) => {
-  return {
-    filmsList: state.filtredFilmsList
-  };
-};
-
-export default connect(mapStateToProps)(CardList);
+export default CardList;

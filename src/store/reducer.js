@@ -15,15 +15,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         genre: action.payload
       };
-    case ActionType.GET_FILMS_LIST:
-      return {
-        ...state,
-        filtredFilmsList: [...state.films]
-      };
     case ActionType.FILTER_FILMS:
       return {
         ...state,
-        filtredFilmsList: state.films.filter((film) => film.genre === state.genre)
+        filtredFilmsList: state.genre === initialState.genre ? [...state.films] : state.films.filter((film) => film.genre === state.genre)
       };
   }
   return state;
