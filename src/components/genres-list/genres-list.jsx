@@ -2,10 +2,7 @@ import React, {useEffect} from 'react';
 import propTypes from 'prop-types';
 
 
-const GenresList = ({genre, filmsList, setGenre, filterFilms}) => {
-  const newGenreList = [{genre: `All genres`}, ...filmsList];
-
-  const genresName = new Set(newGenreList.map((genreType) => genreType.genre));
+const GenresList = ({genre, setGenre, filterFilms, genresName}) => {
 
   const genres = [...genresName].map((genreName, idx) => {
     const activeGenreClass = genreName === genre ? `catalog__genres-item--active` : ``;
@@ -36,6 +33,7 @@ const GenresList = ({genre, filmsList, setGenre, filterFilms}) => {
 
 GenresList.propTypes = {
   genre: propTypes.string.isRequired,
+  genresName: propTypes.object.isRequired,
   setGenre: propTypes.func.isRequired,
   filterFilms: propTypes.func.isRequired,
   filmsList: propTypes.array.isRequired

@@ -1,6 +1,9 @@
 export const ActionType = {
   SET_ACTIVE_GENRE: `set_genre`,
-  FILTER_FILMS: `filter_films`
+  FILTER_FILMS: `filter_films`,
+  SHOW_MORE: `show_more`,
+  SET_FILMS_COUNTER: `set_films_counter`,
+  RESET_FILMS_COUNTER: `reset_films_counter`
 };
 
 export const ActionCreator = {
@@ -10,5 +13,15 @@ export const ActionCreator = {
   }),
   filterFilms: () => ({
     type: ActionType.FILTER_FILMS
+  }),
+  showMore: () => ({
+    type: ActionType.SHOW_MORE
+  }),
+  setFilmsCounter: (counters) => ({
+    type: ActionType.SET_FILMS_COUNTER,
+    payload: counters
+  }),
+  resetFilmsCounter: () => ({
+    type: ActionType.RESET_FILMS_COUNTER
   })
 };

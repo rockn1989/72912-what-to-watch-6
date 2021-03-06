@@ -15,8 +15,9 @@ const App = ({films}) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact>
-          <Welcome films={films} />
+        <Route path="/" exact render={({location}) => {
+          return <Welcome films={films} location={location} />;
+        }}>
         </Route>
         <Route path="/login" exact render={() => <SignIn />} />
         <Route path="/mylist" exact render={() => <MyList films={films} />} />

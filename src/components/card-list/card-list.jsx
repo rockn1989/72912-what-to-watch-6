@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import propTypes from 'prop-types';
-
+import {MAX_FILMS} from '../../const';
 import Card from '../card';
 
-const CardList = ({filmsList}) => {
-
+const CardList = ({filmsList, currentGenre}) => {
+  const {counter} = {...currentGenre};
   const [activeCard, setActiveCard] = useState(null);
 
-  const films = filmsList.slice(0, 8);
+  const films = filmsList.slice(0, (counter + 1) * MAX_FILMS);
 
   const onHoverHandler = (id) => {
     setActiveCard(id);
