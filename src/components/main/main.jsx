@@ -1,15 +1,34 @@
-import React from "react";
+import React, {useEffect} from "react";
 import CardList from "../card-list/card-list";
 import propTypes from "prop-types";
 import {useHistory} from "react-router-dom";
 import Header from '../header/header';
 import GenresList from "../genres-list/genres-list";
-
+import ShowMore from '../show-more/show-more';
+import {MAX_FILMS} from '../../const';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 
-const Welcome = ({genre, filmsList, setGenre, filterFilms, filtredFilms}) => {
+const Welcome = ({location, genre, filmsList, setGenre, filterFilms, filtredFilms, showMore, filmsCounter, setFilmsCounter, resetFilmsCounter}) => {
   const history = useHistory();
+
+  const newGenreList = [{genre: `All genres`}, ...filmsList];
+
+  const genresName = new Set(newGenreList.map((genreType) => genreType.genre));
+
+  if (filmsCounter.length === 0) {
+    setFilmsCounter(genresName);
+  }
+
+  const currentGenre = filmsCounter.filter(({name}) => name === genre).reduce((acc, item) => {
+    acc[item] = item;
+    return item;
+  }, {});
+
+  useEffect(() => {
+    resetFilmsCounter();
+  }, [location]);
+
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -74,16 +93,14 @@ const Welcome = ({genre, filmsList, setGenre, filterFilms, filtredFilms}) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList genre={genre} filmsList={filmsList} setGenre={setGenre} filterFilms={filterFilms} />
+          <GenresList genre={genre} filmsList={filmsList} setGenre={setGenre} filterFilms={filterFilms} genresName={genresName}/>
 
           <div className="catalog__movies-list">
-            <CardList filmsList={filtredFilms} />
+            <CardList filmsList={filtredFilms} currentGenre={currentGenre} />
           </div>
 
           <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
+            { ((filtredFilms.length - (MAX_FILMS * currentGenre.counter)) - MAX_FILMS) > 0 && <ShowMore showMore={showMore} />}
           </div>
         </section>
 
@@ -106,11 +123,16 @@ const Welcome = ({genre, filmsList, setGenre, filterFilms, filtredFilms}) => {
 };
 
 Welcome.propTypes = {
+  location: propTypes.object.isRequired,
   filtredFilms: propTypes.arrayOf(propTypes.object).isRequired,
   genre: propTypes.string.isRequired,
   filmsList: propTypes.array.isRequired,
   setGenre: propTypes.func.isRequired,
   filterFilms: propTypes.func.isRequired,
+  showMore: propTypes.func.isRequired,
+  resetFilmsCounter: propTypes.func.isRequired,
+  setFilmsCounter: propTypes.func.isRequired,
+  filmsCounter: propTypes.array.isRequired,
 };
 
 
@@ -118,7 +140,8 @@ const mapStateToProps = (state) => {
   return {
     genre: state.genre,
     filmsList: state.films,
-    filtredFilms: state.filtredFilmsList
+    filtredFilms: state.filtredFilmsList,
+    filmsCounter: state.filmsCounter
   };
 };
 
@@ -128,6 +151,15 @@ const mapDispatchToProps = (dispatch) => ({
   },
   filterFilms() {
     dispatch(ActionCreator.filterFilms());
+  },
+  showMore() {
+    dispatch(ActionCreator.showMore());
+  },
+  setFilmsCounter(payload) {
+    dispatch(ActionCreator.setFilmsCounter(payload));
+  },
+  resetFilmsCounter() {
+    dispatch(ActionCreator.resetFilmsCounter());
   }
 });
 
