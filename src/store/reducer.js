@@ -1,16 +1,22 @@
 import {ActionType} from './action';
-import films from '../mocks/films';
 
 const initialState = {
   genre: `All genres`,
-  films,
+  films: [],
   filtredFilmsList: [],
-  filmsCounter: []
+  filmsCounter: [],
+  isLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
+    case ActionType.LOAD_FILMS:
+      return {
+        ...state,
+        films: action.payload
+      };
+
     case ActionType.SET_ACTIVE_GENRE:
       return {
         ...state,
@@ -62,6 +68,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filmsCounter: [...resetFilmsCounter]
+      };
+
+    case ActionType.LOADED:
+      return {
+        ...state,
+        isLoaded: !state.isLoaded
       };
   }
   return state;

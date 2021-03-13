@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 
 
@@ -20,10 +20,6 @@ const GenresList = ({genre, setGenre, filterFilms, genresName}) => {
     );
   });
 
-  useEffect(() => {
-    filterFilms();
-  }, []);
-
   return (
     <ul className="catalog__genres-list">
       {genres}
@@ -33,7 +29,7 @@ const GenresList = ({genre, setGenre, filterFilms, genresName}) => {
 
 GenresList.propTypes = {
   genre: propTypes.string.isRequired,
-  genresName: propTypes.object.isRequired,
+  genresName: propTypes.any.isRequired,
   setGenre: propTypes.func.isRequired,
   filterFilms: propTypes.func.isRequired,
   filmsList: propTypes.array.isRequired

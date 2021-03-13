@@ -3,7 +3,9 @@ export const ActionType = {
   FILTER_FILMS: `filter_films`,
   SHOW_MORE: `show_more`,
   SET_FILMS_COUNTER: `set_films_counter`,
-  RESET_FILMS_COUNTER: `reset_films_counter`
+  RESET_FILMS_COUNTER: `reset_films_counter`,
+  LOAD_FILMS: `load_films`,
+  LOADED: `loaded`
 };
 
 export const ActionCreator = {
@@ -23,5 +25,12 @@ export const ActionCreator = {
   }),
   resetFilmsCounter: () => ({
     type: ActionType.RESET_FILMS_COUNTER
+  }),
+  loadFilms: (films) => ({
+    type: ActionType.LOAD_FILMS,
+    payload: films
+  }),
+  isLoaded: () => ({
+    type: ActionType.LOADED
   })
 };

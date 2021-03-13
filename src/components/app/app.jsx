@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import propTypes from "prop-types";
 
@@ -10,13 +10,20 @@ import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 import PageNotFound from "../page-not-found/page-not-found";
 
-const App = ({films}) => {
+import {connect} from 'react-redux';
+import {loadFilmsList} from "../../store/api-actions";
+
+const App = ({films, loadFilms}) => {
+
+  useEffect(() => {
+    loadFilms();
+  }, []);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact render={({location}) => {
-          return <Welcome films={films} location={location} />;
+          return <Welcome filmsList={films} location={location} />;
         }}>
         </Route>
         <Route path="/login" exact render={() => <SignIn />} />
@@ -41,7 +48,20 @@ const App = ({films}) => {
 
 
 App.propTypes = {
-  films: propTypes.arrayOf(propTypes.object).isRequired
+  films: propTypes.arrayOf(propTypes.object).isRequired,
+  loadFilms: propTypes.func.isRequired
 };
 
-export default App;
+const mapStateToProps = ({films}) => {
+  return {
+    films
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  loadFilms() {
+    dispatch(loadFilmsList());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
