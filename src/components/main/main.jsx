@@ -21,7 +21,7 @@ const Welcome = ({
   filmsCounter,
   setFilmsCounter,
   resetFilmsCounter,
-  isLoaded
+  filmsLoaded
 }) => {
   const history = useHistory();
 
@@ -109,7 +109,7 @@ const Welcome = ({
       </section>
 
       <div className="page-content">
-        {isLoaded ? (<section className="catalog">
+        {filmsLoaded ? (<section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresList genre={genre} filmsList={filmsList} setGenre={setGenre} filterFilms={filterFilms} genresName={genresName}/>
@@ -152,7 +152,7 @@ Welcome.propTypes = {
   resetFilmsCounter: propTypes.func.isRequired,
   setFilmsCounter: propTypes.func.isRequired,
   filmsCounter: propTypes.array.isRequired,
-  isLoaded: propTypes.bool.isRequired
+  filmsLoaded: propTypes.bool.isRequired
 };
 
 
@@ -161,7 +161,7 @@ const mapStateToProps = (state) => {
     genre: state.genre,
     filtredFilms: state.filtredFilmsList,
     filmsCounter: state.filmsCounter,
-    isLoaded: state.isLoaded
+    filmsLoaded: state.filmsLoaded
   };
 };
 

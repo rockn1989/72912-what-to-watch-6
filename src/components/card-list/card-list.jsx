@@ -3,8 +3,7 @@ import propTypes from 'prop-types';
 import {MAX_FILMS} from '../../const';
 import Card from '../card';
 
-const CardList = ({filmsList, currentGenre}) => {
-
+const CardList = ({filmsList, currentGenre = {counter: 0}}) => {
   const {counter} = {...currentGenre};
   const [activeCard, setActiveCard] = useState(null);
   const films = filmsList.slice(0, (counter + 1) * MAX_FILMS);

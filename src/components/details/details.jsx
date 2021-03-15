@@ -1,8 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const Details = ({realeased, genre, director, starring, runTime}) => {
-
+const Details = ({film}) => {
+  const {released, genre, director, starring, run_time: runTime} = film;
   return (
     <div className="movie-card__text movie-card__row">
       <div className="movie-card__text-col">
@@ -34,7 +34,7 @@ const Details = ({realeased, genre, director, starring, runTime}) => {
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Released</strong>
-          <span className="movie-card__details-value">{realeased}</span>
+          <span className="movie-card__details-value">{released}</span>
         </p>
       </div>
     </div>
@@ -42,11 +42,7 @@ const Details = ({realeased, genre, director, starring, runTime}) => {
 };
 
 Details.propTypes = {
-  realeased: propTypes.number.isRequired,
-  genre: propTypes.string.isRequired,
-  director: propTypes.string.isRequired,
-  starring: propTypes.array.isRequired,
-  runTime: propTypes.number.isRequired,
+  film: propTypes.object.isRequired
 };
 
 export default Details;

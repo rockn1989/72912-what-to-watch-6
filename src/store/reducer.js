@@ -2,10 +2,12 @@ import {ActionType} from './action';
 
 const initialState = {
   genre: `All genres`,
+  film: {},
   films: [],
   filtredFilmsList: [],
   filmsCounter: [],
-  isLoaded: false
+  filmsLoaded: false,
+  filmLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +17,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         films: action.payload
+      };
+
+    case ActionType.LOAD_FILM:
+      return {
+        ...state,
+        film: action.payload
       };
 
     case ActionType.SET_ACTIVE_GENRE:
@@ -70,10 +78,16 @@ const reducer = (state = initialState, action) => {
         filmsCounter: [...resetFilmsCounter]
       };
 
-    case ActionType.LOADED:
+    case ActionType.IS_FILMS_LOADED:
       return {
         ...state,
-        isLoaded: !state.isLoaded
+        filmsLoaded: true
+      };
+
+    case ActionType.IS_FILM_LOADED:
+      return {
+        ...state,
+        filmLoaded: true
       };
   }
   return state;
