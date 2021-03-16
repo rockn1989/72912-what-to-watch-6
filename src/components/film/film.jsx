@@ -16,7 +16,7 @@ import {loadFilm} from "../../store/api-actions";
 
 const tabsTitle = [`Overview`, `Details`, `Reviews`];
 
-const Film = ({id, loadingFilm, film, films, filmLoaded}) => {
+const Film = ({id, loadingFilm, film, films}) => {
 
   const {name, genre, realeased, poster_image: posterImage, background_image: bgImage} = film;
   const similarMovies = films.filter((filmInfo) => filmInfo.genre === genre);
@@ -24,9 +24,9 @@ const Film = ({id, loadingFilm, film, films, filmLoaded}) => {
 
   useEffect(() => {
     loadingFilm(id);
-  }, [id, filmLoaded]);
+  }, [id]);
 
-  if (!filmLoaded) {
+  if (Object.keys(film).length === 0) {
     return <Preloader />;
   }
 
@@ -140,14 +140,12 @@ Film.propTypes = {
   film: propTypes.object.isRequired,
   films: propTypes.array.isRequired,
   id: propTypes.string.isRequired,
-  loadingFilm: propTypes.func.isRequired,
-  filmLoaded: propTypes.bool.isRequired
+  loadingFilm: propTypes.func.isRequired
 };
 
-const mapStateToProps = ({film, films, filmLoaded}) => {
+const mapStateToProps = ({film, films}) => {
   return {
     film,
-    filmLoaded,
     films
   };
 };

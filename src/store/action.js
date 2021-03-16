@@ -6,7 +6,6 @@ export const ActionType = {
   RESET_FILMS_COUNTER: `reset_films_counter`,
   LOAD_FILMS: `load_films`,
   LOAD_FILM: `load_film`,
-  IS_FILM_LOADED: `film_loaded`
 };
 
 export const ActionCreator = {
@@ -34,8 +33,5 @@ export const ActionCreator = {
   loadFilm: (film) => ({
     type: ActionType.LOAD_FILM,
     payload: film
-  }),
-  isFilmLoaded: () => ({
-    type: ActionType.IS_FILM_LOADED
   })
 };

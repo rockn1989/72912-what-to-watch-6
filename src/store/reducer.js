@@ -5,8 +5,7 @@ const initialState = {
   film: {},
   films: [],
   filtredFilmsList: [],
-  filmsCounter: [],
-  filmLoaded: false
+  filmsCounter: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -75,12 +74,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filmsCounter: [...resetFilmsCounter]
-      };
-
-    case ActionType.IS_FILM_LOADED:
-      return {
-        ...state,
-        filmLoaded: true
       };
   }
   return state;
