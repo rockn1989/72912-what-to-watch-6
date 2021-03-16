@@ -5,7 +5,6 @@ import {useHistory} from "react-router-dom";
 import Header from '../header/header';
 import GenresList from "../genres-list/genres-list";
 import ShowMore from '../show-more/show-more';
-import Preloader from '../preloader/preloader.jsx';
 import {MAX_FILMS} from '../../const';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
@@ -20,8 +19,7 @@ const Welcome = ({
   showMore,
   filmsCounter,
   setFilmsCounter,
-  resetFilmsCounter,
-  filmsLoaded
+  resetFilmsCounter
 }) => {
   const history = useHistory();
 
@@ -109,7 +107,7 @@ const Welcome = ({
       </section>
 
       <div className="page-content">
-        {filmsLoaded ? (<section className="catalog">
+        <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresList genre={genre} filmsList={filmsList} setGenre={setGenre} filterFilms={filterFilms} genresName={genresName}/>
@@ -121,7 +119,7 @@ const Welcome = ({
           <div className="catalog__more">
             { ((filtredFilms.length - (MAX_FILMS * currentGenre.counter)) - MAX_FILMS) > 0 && <ShowMore showMore={showMore} />}
           </div>
-        </section>) : <Preloader/>}
+        </section>
 
         <footer className="page-footer">
           <div className="logo">
@@ -152,7 +150,6 @@ Welcome.propTypes = {
   resetFilmsCounter: propTypes.func.isRequired,
   setFilmsCounter: propTypes.func.isRequired,
   filmsCounter: propTypes.array.isRequired,
-  filmsLoaded: propTypes.bool.isRequired
 };
 
 
@@ -161,7 +158,6 @@ const mapStateToProps = (state) => {
     genre: state.genre,
     filtredFilms: state.filtredFilmsList,
     filmsCounter: state.filmsCounter,
-    filmsLoaded: state.filmsLoaded
   };
 };
 

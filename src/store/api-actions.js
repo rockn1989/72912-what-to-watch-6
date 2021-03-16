@@ -5,7 +5,6 @@ export const loadFilmsList = () => (dispatch, _getState, api) => {
     .then(({data}) => {
       dispatch(ActionCreator.loadFilms(data));
       dispatch(ActionCreator.filterFilms());
-      dispatch(ActionCreator.isLoaded());
     });
 };
 

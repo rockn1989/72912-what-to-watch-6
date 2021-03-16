@@ -9,7 +9,7 @@ import Film from "../film/film";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 import PageNotFound from "../page-not-found/page-not-found";
-
+import Preloader from '../preloader/preloader';
 import {connect} from 'react-redux';
 import {loadFilmsList} from "../../store/api-actions";
 
@@ -23,7 +23,7 @@ const App = ({films, loadFilms}) => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact render={({location}) => {
-          return <Welcome filmsList={films} location={location} />;
+          return films.length > 0 ? <Welcome filmsList={films} location={location} /> : <Preloader />;
         }}>
         </Route>
         <Route path="/login" exact render={() => <SignIn />} />
