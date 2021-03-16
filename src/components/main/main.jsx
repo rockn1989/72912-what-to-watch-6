@@ -23,24 +23,18 @@ const Welcome = ({
 }) => {
   const history = useHistory();
 
-  let newGenreList = [];
-  let genresName = [];
-  let currentGenre = [];
+  const newGenreList = [{genre: `All genres`}, ...filmsList];
 
-  if (filmsList.length !== 0) {
-    newGenreList = [{genre: `All genres`}, ...filmsList];
+  const genresName = new Set(newGenreList.map((genreType) => genreType.genre));
 
-    genresName = new Set(newGenreList.map((genreType) => genreType.genre));
-
-    if (filmsCounter.length === 0) {
-      setFilmsCounter(genresName);
-    }
-
-    currentGenre = filmsCounter.filter(({name}) => name === genre).reduce((acc, item) => {
-      acc[item] = item;
-      return item;
-    }, {});
+  if (filmsCounter.length === 0) {
+    setFilmsCounter(genresName);
   }
+
+  const currentGenre = filmsCounter.filter(({name}) => name === genre).reduce((acc, item) => {
+    acc[item] = item;
+    return item;
+  }, {});
 
   useEffect(() => {
     resetFilmsCounter();
