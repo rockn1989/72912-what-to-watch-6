@@ -11,9 +11,9 @@ import Player from "../player/player";
 import PageNotFound from "../page-not-found/page-not-found";
 import Preloader from '../preloader/preloader';
 import {connect} from 'react-redux';
-import {loadFilmsList} from "../../store/api-actions";
+import {loadFilmsList, loadFilm} from "../../store/api-actions";
 
-const App = ({films, loadFilms}) => {
+const App = ({films, loadFilms, film, loadingFilm}) => {
 
   useEffect(() => {
     loadFilms();
@@ -30,7 +30,7 @@ const App = ({films, loadFilms}) => {
         <Route path="/mylist" exact render={() => <MyList films={films} />} />
         <Route path="/films/:id" exact render={({match}) => {
           const id = match.params.id;
-          return <Film films={films} id={id} />;
+          return <Film loadingFilm={loadingFilm} films={films} film={film} id={id} />;
         }} />
         <Route path="/films/:id/review" exact render={({match}) => {
           const id = match.params.id;
@@ -49,12 +49,15 @@ const App = ({films, loadFilms}) => {
 
 App.propTypes = {
   films: propTypes.arrayOf(propTypes.object).isRequired,
-  loadFilms: propTypes.func.isRequired
+  film: propTypes.object.isRequired,
+  loadFilms: propTypes.func.isRequired,
+  loadingFilm: propTypes.func.isRequired
 };
 
-const mapStateToProps = ({films}) => {
+const mapStateToProps = ({films, film}) => {
   return {
-    films
+    films,
+    film
   };
 };
 
@@ -62,6 +65,9 @@ const mapDispatchToProps = (dispatch) => ({
   loadFilms() {
     dispatch(loadFilmsList());
   },
+  loadingFilm(payload) {
+    dispatch(loadFilm(payload));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

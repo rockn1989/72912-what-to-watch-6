@@ -11,9 +11,6 @@ import reviews from '../../mocks/reviews';
 
 import Preloader from '../preloader/preloader';
 
-import {connect} from 'react-redux';
-import {loadFilm} from "../../store/api-actions";
-
 const tabsTitle = [`Overview`, `Details`, `Reviews`];
 
 const Film = ({id, loadingFilm, film, films}) => {
@@ -143,17 +140,5 @@ Film.propTypes = {
   loadingFilm: propTypes.func.isRequired
 };
 
-const mapStateToProps = ({film, films}) => {
-  return {
-    film,
-    films
-  };
-};
 
-const mapDispatchToProps = (dispatch) => ({
-  loadingFilm(payload) {
-    dispatch(loadFilm(payload));
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Film);
+export default Film;
