@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import propTypes from "prop-types";
 
@@ -9,21 +9,28 @@ import Film from "../film/film";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 import PageNotFound from "../page-not-found/page-not-found";
+import Preloader from '../preloader/preloader';
+import {connect} from 'react-redux';
+import {loadFilmsList, loadFilm} from "../../store/api-actions";
 
-const App = ({films}) => {
+const App = ({films, loadFilms, film, loadingFilm}) => {
+
+  useEffect(() => {
+    loadFilms();
+  }, []);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact render={({location}) => {
-          return <Welcome films={films} location={location} />;
+          return films.length > 0 ? <Welcome filmsList={films} location={location} /> : <Preloader />;
         }}>
         </Route>
         <Route path="/login" exact render={() => <SignIn />} />
         <Route path="/mylist" exact render={() => <MyList films={films} />} />
         <Route path="/films/:id" exact render={({match}) => {
           const id = match.params.id;
-          return <Film films={films} id={id} />;
+          return <Film loadingFilm={loadingFilm} films={films} film={film} id={id} />;
         }} />
         <Route path="/films/:id/review" exact render={({match}) => {
           const id = match.params.id;
@@ -41,7 +48,26 @@ const App = ({films}) => {
 
 
 App.propTypes = {
-  films: propTypes.arrayOf(propTypes.object).isRequired
+  films: propTypes.arrayOf(propTypes.object).isRequired,
+  film: propTypes.object.isRequired,
+  loadFilms: propTypes.func.isRequired,
+  loadingFilm: propTypes.func.isRequired
 };
 
-export default App;
+const mapStateToProps = ({films, film}) => {
+  return {
+    films,
+    film
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  loadFilms() {
+    dispatch(loadFilmsList());
+  },
+  loadingFilm(payload) {
+    dispatch(loadFilm(payload));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

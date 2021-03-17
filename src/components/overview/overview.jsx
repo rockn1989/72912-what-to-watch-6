@@ -1,8 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const Overview = ({rating, scoresCount, description, director, starring}) => {
-
+const Overview = ({film}) => {
+  const {rating, scores_count: scoresCount, description, director, starring} = film;
   return (
     <>
       <div className="movie-rating">
@@ -38,11 +38,7 @@ const Overview = ({rating, scoresCount, description, director, starring}) => {
 };
 
 Overview.propTypes = {
-  rating: propTypes.number.isRequired,
-  scoresCount: propTypes.number.isRequired,
-  description: propTypes.string.isRequired,
-  director: propTypes.string.isRequired,
-  starring: propTypes.array.isRequired
+  film: propTypes.object.isRequired
 };
 
 export default Overview;

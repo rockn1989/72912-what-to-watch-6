@@ -9,7 +9,18 @@ import {MAX_FILMS} from '../../const';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 
-const Welcome = ({location, genre, filmsList, setGenre, filterFilms, filtredFilms, showMore, filmsCounter, setFilmsCounter, resetFilmsCounter}) => {
+const Welcome = ({
+  location,
+  genre,
+  filmsList,
+  setGenre,
+  filterFilms,
+  filtredFilms,
+  showMore,
+  filmsCounter,
+  setFilmsCounter,
+  resetFilmsCounter
+}) => {
   const history = useHistory();
 
   const newGenreList = [{genre: `All genres`}, ...filmsList];
@@ -139,9 +150,8 @@ Welcome.propTypes = {
 const mapStateToProps = (state) => {
   return {
     genre: state.genre,
-    filmsList: state.films,
     filtredFilms: state.filtredFilmsList,
-    filmsCounter: state.filmsCounter
+    filmsCounter: state.filmsCounter,
   };
 };
 
@@ -160,7 +170,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   resetFilmsCounter() {
     dispatch(ActionCreator.resetFilmsCounter());
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

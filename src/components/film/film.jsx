@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link, useHistory} from 'react-router-dom';
 import propTypes from "prop-types";
 import Header from '../header/header';
@@ -9,13 +9,23 @@ import Details from '../details/details';
 import Reviews from '../reviews/reviews';
 import reviews from '../../mocks/reviews';
 
+import Preloader from '../preloader/preloader';
+
 const tabsTitle = [`Overview`, `Details`, `Reviews`];
 
-const Film = ({films, id}) => {
-  const [film] = films.filter((filmItem) => filmItem.id === parseInt(id, 10));
-  const similarMovies = films.filter((filmItem) => filmItem.genre === film.genre);
-  const {name, realeased, gener} = film;
+const Film = ({id, loadingFilm, film, films}) => {
+
+  const {name, genre, realeased, poster_image: posterImage, background_image: bgImage} = film;
+  const similarMovies = films.filter((filmInfo) => filmInfo.genre === genre);
   const history = useHistory();
+
+  useEffect(() => {
+    loadingFilm(id);
+  }, [id]);
+
+  if (Object.keys(film).length === 0) {
+    return <Preloader />;
+  }
 
   return (
     <React.Fragment>
@@ -23,8 +33,8 @@ const Film = ({films, id}) => {
         <div className="movie-card__hero">
           <div className="movie-card__bg">
             <img
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              alt="The Grand Budapest Hotel"
+              src={bgImage}
+              alt={name}
             />
           </div>
 
@@ -36,7 +46,7 @@ const Film = ({films, id}) => {
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{gener}</span>
+                <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{realeased}</span>
               </p>
 
@@ -75,8 +85,8 @@ const Film = ({films, id}) => {
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
+                src={posterImage}
+                alt={name}
                 width="218"
                 height="327"
               />
@@ -85,8 +95,8 @@ const Film = ({films, id}) => {
             <div className="movie-card__desc">
 
               <Tabs tabsTitle={tabsTitle} {...film}>
-                <Overview {...film}/>
-                <Details {...film}/>
+                <Overview film={film}/>
+                <Details film={film}/>
                 <Reviews reviews={reviews}/>
               </Tabs>
 
@@ -124,8 +134,11 @@ const Film = ({films, id}) => {
 };
 
 Film.propTypes = {
+  film: propTypes.object.isRequired,
   films: propTypes.array.isRequired,
-  id: propTypes.string.isRequired
+  id: propTypes.string.isRequired,
+  loadingFilm: propTypes.func.isRequired
 };
+
 
 export default Film;
