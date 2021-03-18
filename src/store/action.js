@@ -6,6 +6,8 @@ export const ActionType = {
   RESET_FILMS_COUNTER: `reset_films_counter`,
   LOAD_FILMS: `load_films`,
   LOAD_FILM: `load_film`,
+  AUTHORIZED: `authorized`,
+  SET_USER_INFO: `set_user_info`
 };
 
 export const ActionCreator = {
@@ -33,5 +35,13 @@ export const ActionCreator = {
   loadFilm: (film) => ({
     type: ActionType.LOAD_FILM,
     payload: film
+  }),
+  authorization: (status) => ({
+    type: ActionType.AUTHORIZED,
+    payload: status
+  }),
+  setUserInfo: (data) => ({
+    type: ActionType.SET_USER_INFO,
+    payload: data
   })
 };

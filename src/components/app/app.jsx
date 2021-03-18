@@ -10,27 +10,37 @@ import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 import PageNotFound from "../page-not-found/page-not-found";
 import Preloader from '../preloader/preloader';
+import PrivateRoute from '../private-route/private-route';
 import {connect} from 'react-redux';
-import {loadFilmsList, loadFilm} from "../../store/api-actions";
+import {loadFilmsList, loadFilm, login, checkLogin} from "../../store/api-actions";
 
-const App = ({films, loadFilms, film, loadingFilm}) => {
+const App = ({
+  films,
+  loadFilms,
+  film,
+  loadingFilm,
+  checkAuthorizationStatus,
+  authorizationStatus,
+  sendLoginData,
+  avatar}) => {
 
   useEffect(() => {
     loadFilms();
+    checkAuthorizationStatus();
   }, []);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact render={({location}) => {
-          return films.length > 0 ? <Welcome filmsList={films} location={location} /> : <Preloader />;
+          return films.length > 0 ? <Welcome filmsList={films} location={location} auth={authorizationStatus} avatar={avatar} /> : <Preloader />;
         }}>
         </Route>
-        <Route path="/login" exact render={() => <SignIn />} />
+        <PrivateRoute path="/login" authorizationStatus={authorizationStatus} exact component={() => <SignIn sendLogin={sendLoginData}/>}/>
         <Route path="/mylist" exact render={() => <MyList films={films} />} />
         <Route path="/films/:id" exact render={({match}) => {
           const id = match.params.id;
-          return <Film loadingFilm={loadingFilm} films={films} film={film} id={id} />;
+          return <Film loadingFilm={loadingFilm} films={films} film={film} id={id} auth={authorizationStatus} avatar={avatar} />;
         }} />
         <Route path="/films/:id/review" exact render={({match}) => {
           const id = match.params.id;
@@ -51,13 +61,19 @@ App.propTypes = {
   films: propTypes.arrayOf(propTypes.object).isRequired,
   film: propTypes.object.isRequired,
   loadFilms: propTypes.func.isRequired,
-  loadingFilm: propTypes.func.isRequired
+  loadingFilm: propTypes.func.isRequired,
+  checkAuthorizationStatus: propTypes.func.isRequired,
+  sendLoginData: propTypes.func.isRequired,
+  authorizationStatus: propTypes.bool.isRequired,
+  avatar: propTypes.string.isRequired,
 };
 
-const mapStateToProps = ({films, film}) => {
+const mapStateToProps = ({films, film, authorizationStatus, userInfo}) => {
   return {
     films,
-    film
+    film,
+    authorizationStatus,
+    avatar: userInfo.avatarUrl
   };
 };
 
@@ -67,7 +83,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadingFilm(payload) {
     dispatch(loadFilm(payload));
-  }
+  },
+  checkAuthorizationStatus() {
+    dispatch(login());
+  },
+  sendLoginData(payload) {
+    dispatch(checkLogin(payload));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
