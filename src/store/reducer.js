@@ -1,11 +1,16 @@
 import {ActionType} from './action';
+import {AUTH, NO_AUTH} from '../const';
 
 const initialState = {
   genre: `All genres`,
   film: {},
   films: [],
   filtredFilmsList: [],
-  filmsCounter: []
+  filmsCounter: [],
+  authorizationStatus: NO_AUTH,
+  userInfo: {
+    avatarUrl: `img/avatar.jpg`
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -74,6 +79,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filmsCounter: [...resetFilmsCounter]
+      };
+
+    case ActionType.AUTHORIZED:
+      return {
+        ...state,
+        authorizationStatus: action.payload ? AUTH : NO_AUTH
+      };
+
+    case ActionType.SET_USER_INFO:
+      const {avatar_url: avatar, ...restData} = {...action.payload};
+      return {
+        ...state,
+        userInfo: {...restData, avatarUrl: avatar}
       };
   }
   return state;

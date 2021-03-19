@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import propTypes from 'prop-types';
 
 const Header = (props) => {
-  const {className} = props;
+  const {className, auth, avatar} = props;
 
   return (
     <header className={`page-header ${className}`}>
@@ -18,14 +18,17 @@ const Header = (props) => {
       {props.children}
 
       <div className="user-block">
-        <div className="user-block__avatar">
-          <img
-            src="img/avatar.jpg"
-            alt="User avatar"
-            width="63"
-            height="63"
-          />
-        </div>
+        {auth ?
+          <div className="user-block__avatar">
+            <img
+              src={avatar}
+              alt="User avatar"
+              width="63"
+              height="63"
+            />
+          </div> :
+          <Link to="/login" className="user-block__link">Sign in</Link>
+        }
       </div>
     </header>
   );
@@ -33,7 +36,9 @@ const Header = (props) => {
 
 Header.propTypes = {
   className: propTypes.string,
-  children: propTypes.any
+  children: propTypes.any,
+  auth: propTypes.bool.isRequired,
+  avatar: propTypes.string.isRequired
 };
 
 export default Header;

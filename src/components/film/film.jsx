@@ -13,7 +13,7 @@ import Preloader from '../preloader/preloader';
 
 const tabsTitle = [`Overview`, `Details`, `Reviews`];
 
-const Film = ({id, loadingFilm, film, films}) => {
+const Film = ({id, loadingFilm, film, films, auth, avatar}) => {
 
   const {name, genre, realeased, poster_image: posterImage, background_image: bgImage} = film;
   const similarMovies = films.filter((filmInfo) => filmInfo.genre === genre);
@@ -40,7 +40,7 @@ const Film = ({id, loadingFilm, film, films}) => {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header className={`movie-card__head`}/>
+          <Header className={`movie-card__head`} auth={auth} avatar={avatar}/>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -137,7 +137,9 @@ Film.propTypes = {
   film: propTypes.object.isRequired,
   films: propTypes.array.isRequired,
   id: propTypes.string.isRequired,
-  loadingFilm: propTypes.func.isRequired
+  loadingFilm: propTypes.func.isRequired,
+  auth: propTypes.bool.isRequired,
+  avatar: propTypes.string.isRequired,
 };
 
 

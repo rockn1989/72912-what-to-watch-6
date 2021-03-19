@@ -1,22 +1,35 @@
-import React from "react";
+import React, {useRef} from "react";
+import {Link} from 'react-router-dom';
+import propTypes from 'prop-types';
 
-const SignIn = () => {
+const SignIn = ({sendLogin}) => {
+  const sendForm = useRef(null);
+
+  const sendLoginData = (evt) => {
+    evt.preventDefault();
+    const userData = {};
+    userData.email = sendForm.current[`user-email`].value;
+    userData.password = sendForm.current[`user-password`].value;
+
+    sendLogin(userData);
+  };
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <div className="logo">
-          <a href="main.html" className="logo__link">
+          <Link to="/" className="logo__link">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
         </div>
 
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form ref={sendForm} action="#" className="sign-in__form" onSubmit={sendLoginData}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
@@ -72,6 +85,10 @@ const SignIn = () => {
       </footer>
     </div>
   );
+};
+
+SignIn.propTypes = {
+  sendLogin: propTypes.func.isRequired
 };
 
 export default SignIn;

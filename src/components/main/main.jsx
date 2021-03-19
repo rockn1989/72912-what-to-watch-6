@@ -19,7 +19,9 @@ const Welcome = ({
   showMore,
   filmsCounter,
   setFilmsCounter,
-  resetFilmsCounter
+  resetFilmsCounter,
+  auth,
+  avatar
 }) => {
   const history = useHistory();
 
@@ -52,7 +54,7 @@ const Welcome = ({
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header />
+        <Header auth={auth} avatar={avatar} />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -144,6 +146,8 @@ Welcome.propTypes = {
   resetFilmsCounter: propTypes.func.isRequired,
   setFilmsCounter: propTypes.func.isRequired,
   filmsCounter: propTypes.array.isRequired,
+  auth: propTypes.bool.isRequired,
+  avatar: propTypes.string.isRequired
 };
 
 
