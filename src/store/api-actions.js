@@ -34,7 +34,7 @@ export const logout = () => (dispatch, _getState, api) => {
     });
 };
 
-export const checkLogin = ({email, password}) => (dispatch, _getState, api) => {
+export const sendLogin = ({email, password}) => (dispatch, _getState, api) => {
   api.post(`/login`, {
     email,
     password

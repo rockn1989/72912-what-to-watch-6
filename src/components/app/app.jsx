@@ -12,21 +12,21 @@ import PageNotFound from "../page-not-found/page-not-found";
 import Preloader from '../preloader/preloader';
 import PrivateRoute from '../private-route/private-route';
 import {connect} from 'react-redux';
-import {loadFilmsList, loadFilm, login, checkLogin} from "../../store/api-actions";
+import {loadFilmsList, loadFilm, login, sendLogin} from "../../store/api-actions";
 
 const App = ({
   films,
   loadFilms,
   film,
   loadingFilm,
-  checkAuthorizationStatus,
+  checkLogin,
   authorizationStatus,
   sendLoginData,
   avatar}) => {
 
   useEffect(() => {
     loadFilms();
-    checkAuthorizationStatus();
+    checkLogin();
   }, []);
 
   return (
@@ -62,7 +62,7 @@ App.propTypes = {
   film: propTypes.object.isRequired,
   loadFilms: propTypes.func.isRequired,
   loadingFilm: propTypes.func.isRequired,
-  checkAuthorizationStatus: propTypes.func.isRequired,
+  checkLogin: propTypes.func.isRequired,
   sendLoginData: propTypes.func.isRequired,
   authorizationStatus: propTypes.bool.isRequired,
   avatar: propTypes.string.isRequired,
@@ -84,11 +84,11 @@ const mapDispatchToProps = (dispatch) => ({
   loadingFilm(payload) {
     dispatch(loadFilm(payload));
   },
-  checkAuthorizationStatus() {
+  checkLogin() {
     dispatch(login());
   },
   sendLoginData(payload) {
-    dispatch(checkLogin(payload));
+    dispatch(sendLogin(payload));
   },
 });
 
