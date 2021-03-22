@@ -52,7 +52,16 @@ const App = ({
           return <Film loadingFilm={loadingFilm} films={films} film={film} id={id} auth={authorizationStatus} avatar={avatar} />;
         }} />
 
-        <PrivateRoute path="/films/:id/review" authorizationStatus={authorizationStatus} exact component={() => <AddReview sendComment={sendUserComment} error={error} film={film} formStatus={formStatus} auth={authorizationStatus} avatar={avatar} />}/>
+        <PrivateRoute path="/films/:id/review" authorizationStatus={authorizationStatus} exact component={() => {
+          return <AddReview sendComment={sendUserComment}
+            error={error}
+            film={film}
+            formStatus={formStatus}
+            auth={authorizationStatus}
+            avatar={avatar}
+          />;
+        }
+        }/>
 
         <Route path="/player/:id" exact render={({match}) => {
           const id = match.params.id;
