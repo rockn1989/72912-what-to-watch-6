@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 const PrivateRoute = ({component: Component, authorizationStatus, ...rest}) => {
   return (
     <Route {...rest}
-      render={(props) => authorizationStatus ? <Redirect to="/" /> : <Component {...props} /> }
+      render={(props) => authorizationStatus ? <Component {...props} /> : <Redirect to="/" /> }
     />
   );
 };

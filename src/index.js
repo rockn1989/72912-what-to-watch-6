@@ -8,12 +8,20 @@ import thunk from 'redux-thunk';
 import {reducer} from './store/reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from './api';
+import {ActionCreator} from './store/action';
+import {redirect} from './store/redirect';
 
-const api = createAPI();
+const onUnauthorized = () => {
+  store.dispatch(ActionCreator.authorization(false));
+};
+
+
+const api = createAPI(onUnauthorized);
 
 const store = createStore(reducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
 

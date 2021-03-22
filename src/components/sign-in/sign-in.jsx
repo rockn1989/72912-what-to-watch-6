@@ -1,8 +1,8 @@
 import React, {useRef} from "react";
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import propTypes from 'prop-types';
 
-const SignIn = ({sendLogin}) => {
+const SignIn = ({sendLogin, auth}) => {
   const sendForm = useRef(null);
 
   const sendLoginData = (evt) => {
@@ -13,6 +13,10 @@ const SignIn = ({sendLogin}) => {
 
     sendLogin(userData);
   };
+
+  if (auth) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="user-page">
@@ -88,7 +92,8 @@ const SignIn = ({sendLogin}) => {
 };
 
 SignIn.propTypes = {
-  sendLogin: propTypes.func.isRequired
+  sendLogin: propTypes.func.isRequired,
+  auth: propTypes.bool.isRequired
 };
 
 export default SignIn;
