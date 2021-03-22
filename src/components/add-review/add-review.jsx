@@ -3,10 +3,15 @@ import propTypes from "prop-types";
 import AddReviewForm from '../add-review-form/add-review-form';
 import Header from '../header/header';
 import BreadCrumbs from '../breadcrumbs/breadcrumbs';
+import Preloader from '../preloader/preloader';
 
-const AddReview = ({films, id}) => {
-  const [film] = films.filter((filmItem) => filmItem.id === parseInt(id, 10));
-  const {name, posterImage, backgroundImage} = film;
+const AddReview = ({sendComment, film, auth, avatar, formStatus, error}) => {
+
+  const {name, poster_image: posterImage, background_image: backgroundImage, id} = film;
+
+  if (Object.keys(film).length === 0) {
+    return <Preloader />;
+  }
 
   return (
     <section className="movie-card movie-card--full">
@@ -17,7 +22,7 @@ const AddReview = ({films, id}) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header>
+        <Header auth={auth} avatar={avatar}>
           <BreadCrumbs id={id} name={name} />
         </Header>
 
@@ -26,14 +31,18 @@ const AddReview = ({films, id}) => {
         </div>
       </div>
 
-      <AddReviewForm id={id} />
+      <AddReviewForm sendComment={sendComment} id={id} formStatus={formStatus} error={error} />
     </section>
   );
 };
 
 AddReview.propTypes = {
-  films: propTypes.array,
-  id: propTypes.string.isRequired
+  film: propTypes.object.isRequired,
+  auth: propTypes.bool.isRequired,
+  avatar: propTypes.string.isRequired,
+  sendComment: propTypes.func.isRequired,
+  formStatus: propTypes.bool.isRequired,
+  error: propTypes.bool.isRequired,
 };
 
 export default AddReview;

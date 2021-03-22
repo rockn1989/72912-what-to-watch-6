@@ -10,7 +10,9 @@ const initialState = {
   authorizationStatus: NO_AUTH,
   userInfo: {
     avatarUrl: `img/avatar.jpg`
-  }
+  },
+  formStatus: true,
+  error: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -92,6 +94,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userInfo: {...restData, avatarUrl: avatar}
+      };
+
+    case ActionType.SEND_FORM_DATA:
+      return {
+        ...state,
+        formStatus: action.payload
+      };
+
+    case ActionType.SHOW_ERROR:
+      return {
+        ...state,
+        error: true
       };
   }
   return state;

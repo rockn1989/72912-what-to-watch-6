@@ -18,7 +18,7 @@ const BreadCrumbs = ({id, name}) => {
 };
 
 BreadCrumbs.propTypes = {
-  id: propTypes.string.isRequired,
+  id: propTypes.number.isRequired,
   name: propTypes.string.isRequired,
 };
 

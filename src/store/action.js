@@ -7,7 +7,11 @@ export const ActionType = {
   LOAD_FILMS: `load_films`,
   LOAD_FILM: `load_film`,
   AUTHORIZED: `authorized`,
-  SET_USER_INFO: `set_user_info`
+  SET_USER_INFO: `set_user_info`,
+  REDIRECT_TO_ROUTE: `redirect_to_route`,
+  SEND_COMMENT: `send_comment`,
+  SEND_FORM_DATA: `send_form_data`,
+  SHOW_ERROR: `show_error`
 };
 
 export const ActionCreator = {
@@ -43,5 +47,21 @@ export const ActionCreator = {
   setUserInfo: (data) => ({
     type: ActionType.SET_USER_INFO,
     payload: data
+  }),
+  redirect: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url
+  }),
+  sendUserComment: (data) => ({
+    type: ActionType.SEND_COMMENT,
+    payload: data
+  }),
+  sendFormData: (bool) => ({
+    type: ActionType.SEND_FORM_DATA,
+    payload: bool
+  }),
+  showError: (bool) => ({
+    type: ActionType.SHOW_ERROR,
+    payload: bool
   })
 };

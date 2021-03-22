@@ -75,7 +75,7 @@ const Film = ({id, loadingFilm, film, films, auth, avatar}) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={{pathname: `/films/${id}/review`}} className="btn movie-card__button">Add review</Link>
+                {auth && <Link to={{pathname: `/films/${id}/review`}} className="btn movie-card__button">Add review</Link>}
               </div>
             </div>
           </div>
