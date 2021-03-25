@@ -1,6 +1,5 @@
 export const ActionType = {
   SET_ACTIVE_GENRE: `set_genre`,
-  FILTER_FILMS: `filter_films`,
   SHOW_MORE: `show_more`,
   SET_FILMS_COUNTER: `set_films_counter`,
   RESET_FILMS_COUNTER: `reset_films_counter`,
@@ -14,54 +13,61 @@ export const ActionType = {
   SHOW_ERROR: `show_error`
 };
 
-export const ActionCreator = {
-  setGenre: (genre) => ({
-    type: ActionType.SET_ACTIVE_GENRE,
-    payload: genre
-  }),
-  filterFilms: () => ({
-    type: ActionType.FILTER_FILMS
-  }),
-  showMore: () => ({
-    type: ActionType.SHOW_MORE
-  }),
-  setFilmsCounter: (counters) => ({
-    type: ActionType.SET_FILMS_COUNTER,
-    payload: counters
-  }),
-  resetFilmsCounter: () => ({
-    type: ActionType.RESET_FILMS_COUNTER
-  }),
-  loadFilms: (films) => ({
-    type: ActionType.LOAD_FILMS,
-    payload: films
-  }),
-  loadFilm: (film) => ({
-    type: ActionType.LOAD_FILM,
-    payload: film
-  }),
-  authorization: (status) => ({
-    type: ActionType.AUTHORIZED,
-    payload: status
-  }),
-  setUserInfo: (data) => ({
-    type: ActionType.SET_USER_INFO,
-    payload: data
-  }),
-  redirect: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url
-  }),
-  sendUserComment: (data) => ({
-    type: ActionType.SEND_COMMENT,
-    payload: data
-  }),
-  sendFormData: (bool) => ({
-    type: ActionType.SEND_FORM_DATA,
-    payload: bool
-  }),
-  showError: (bool) => ({
-    type: ActionType.SHOW_ERROR,
-    payload: bool
-  })
-};
+export const setGenreAction = (genre) => ({
+  type: ActionType.SET_ACTIVE_GENRE,
+  payload: genre
+});
+
+export const loadFilmsAction = (films) => ({
+  type: ActionType.LOAD_FILMS,
+  payload: films
+});
+
+export const loadFilmAction = (film) => ({
+  type: ActionType.LOAD_FILM,
+  payload: film
+});
+
+export const showMoreAction = () => ({
+  type: ActionType.SHOW_MORE
+});
+
+export const setFilmsCounterAction = (counters) => ({
+  type: ActionType.SET_FILMS_COUNTER,
+  payload: counters
+});
+
+export const resetFilmsCounterAction = () => ({
+  type: ActionType.RESET_FILMS_COUNTER
+});
+
+export const authorizationAction = (status) => ({
+  type: ActionType.AUTHORIZED,
+  payload: status
+});
+
+export const setUserInfoAction = (data) => ({
+  type: ActionType.SET_USER_INFO,
+  payload: data
+});
+
+export const redirectAction = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url
+});
+
+export const sendUserCommentAction = (data) => ({
+  type: ActionType.SEND_COMMENT,
+  payload: data
+});
+
+export const sendFormDataAction = (bool) => ({
+  type: ActionType.SEND_FORM_DATA,
+  payload: bool
+});
+
+export const showErrorAction = (bool) => ({
+  type: ActionType.SHOW_ERROR,
+  payload: bool
+});
+

@@ -7,22 +7,25 @@ import GenresList from "../genres-list/genres-list";
 import ShowMore from '../show-more/show-more';
 import {MAX_FILMS} from '../../const';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {setGenreAction, showMoreAction, setFilmsCounterAction, resetFilmsCounterAction} from '../../store/action';
+
+import {getFiltredFilms, getFilmsCounter, getFilmGenre, getFiltredFilmsByCounter} from '../../store/films-data/selectors';
 
 const Welcome = ({
   location,
   genre,
   filmsList,
   setGenre,
-  filterFilms,
   filtredFilms,
   showMore,
   filmsCounter,
   setFilmsCounter,
   resetFilmsCounter,
   auth,
-  avatar
+  avatar,
+  countedFilms
 }) => {
+
   const history = useHistory();
 
   const newGenreList = [{genre: `All genres`}, ...filmsList];
@@ -106,10 +109,10 @@ const Welcome = ({
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList genre={genre} filmsList={filmsList} setGenre={setGenre} filterFilms={filterFilms} genresName={genresName}/>
+          <GenresList genre={genre} filmsList={filmsList} setGenre={setGenre} genresName={genresName}/>
 
           <div className="catalog__movies-list">
-            <CardList filmsList={filtredFilms} currentGenre={currentGenre} />
+            <CardList filmsList={countedFilms} currentGenre={currentGenre} />
           </div>
 
           <div className="catalog__more">
@@ -141,11 +144,11 @@ Welcome.propTypes = {
   genre: propTypes.string.isRequired,
   filmsList: propTypes.array.isRequired,
   setGenre: propTypes.func.isRequired,
-  filterFilms: propTypes.func.isRequired,
   showMore: propTypes.func.isRequired,
   resetFilmsCounter: propTypes.func.isRequired,
   setFilmsCounter: propTypes.func.isRequired,
   filmsCounter: propTypes.array.isRequired,
+  countedFilms: propTypes.array.isRequired,
   auth: propTypes.bool.isRequired,
   avatar: propTypes.string.isRequired
 };
@@ -153,27 +156,25 @@ Welcome.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    genre: state.genre,
-    filtredFilms: state.filtredFilmsList,
-    filmsCounter: state.filmsCounter,
+    genre: getFilmGenre(state),
+    filtredFilms: getFiltredFilms(state),
+    filmsCounter: getFilmsCounter(state),
+    countedFilms: getFiltredFilmsByCounter(state)
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   setGenre(payload) {
-    dispatch(ActionCreator.setGenre(payload));
-  },
-  filterFilms() {
-    dispatch(ActionCreator.filterFilms());
+    dispatch(setGenreAction(payload));
   },
   showMore() {
-    dispatch(ActionCreator.showMore());
+    dispatch(showMoreAction());
   },
   setFilmsCounter(payload) {
-    dispatch(ActionCreator.setFilmsCounter(payload));
+    dispatch(setFilmsCounterAction(payload));
   },
   resetFilmsCounter() {
-    dispatch(ActionCreator.resetFilmsCounter());
+    dispatch(resetFilmsCounterAction());
   },
 });
 

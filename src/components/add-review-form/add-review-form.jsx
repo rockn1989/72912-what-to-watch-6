@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import propTypes from "prop-types";
+import FormRatingLabel from '../form-rating-label/form-rating-label';
 
 const errorStyle = {
   marginTop: `10px`,
@@ -9,7 +10,6 @@ const errorStyle = {
 };
 
 const AddReviewForm = ({sendComment, id, formStatus, error}) => {
-
   const [formData, setFormData] = useState({
     rating: 0,
     message: ``,
@@ -58,10 +58,7 @@ const AddReviewForm = ({sendComment, id, formStatus, error}) => {
 
   const fields = new Array(10).fill(``).map((el, idx) => {
     return (
-      <React.Fragment key={`form-field-${idx}`}>
-        <input key={`input-star-${idx + 1}`} onChange={onCheckRatingHandler} className="rating__input" id={`star-${idx + 1}`} type="radio" name="rating" value={idx + 1} disabled={formStatus ? false : true}/>
-        <label key={`label-star-${idx + 1}`} className="rating__label" htmlFor={`star-${idx + 1}`}>Rating {idx + 1}</label>
-      </React.Fragment>
+      <FormRatingLabel key={`form-rating-label-${idx}`} idx={idx} onCheckRatingHandler={onCheckRatingHandler} formStatus={formStatus} />
     );
   });
 

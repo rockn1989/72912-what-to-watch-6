@@ -1,20 +1,19 @@
-import {ActionCreator} from "./action";
+import {loadFilmsAction, loadFilmAction, redirectAction, authorizationAction, setUserInfoAction, sendFormDataAction, showErrorAction} from "./action";
 
 export const loadFilmsList = () => (dispatch, _getState, api) => {
   api.get(`/films`)
     .then(({data}) => {
-      dispatch(ActionCreator.loadFilms(data));
-      dispatch(ActionCreator.filterFilms());
+      dispatch(loadFilmsAction(data));
     });
 };
 
 export const loadFilm = (id) => (dispatch, _getState, api) => {
   api.get(`/films/${id}`)
     .then(({data}) => {
-      dispatch(ActionCreator.loadFilm(data));
+      dispatch(loadFilmAction(data));
     })
     .catch(() => {
-      dispatch(ActionCreator.redirect(`/page-not-found`));
+      dispatch(redirectAction(`/page-not-found`));
     });
 };
 
@@ -22,8 +21,8 @@ export const login = () => (dispatch, _getState, api) => {
   api.get(`/login`)
     .then(({data, status}) => {
       if (status !== 401) {
-        dispatch(ActionCreator.authorization(true));
-        dispatch(ActionCreator.setUserInfo(data));
+        dispatch(authorizationAction(true));
+        dispatch(setUserInfoAction(data));
       }
     });
 };
@@ -32,7 +31,7 @@ export const logout = () => (dispatch, _getState, api) => {
   api.get(`/logout`)
     .then(({status}) => {
       if (status === 200) {
-        dispatch(ActionCreator.authorization(false));
+        dispatch(authorizationAction(false));
       }
     });
 };
@@ -43,25 +42,25 @@ export const sendLogin = ({email, password}) => (dispatch, _getState, api) => {
     password
   }).then(({data, status}) => {
     if (status === 200) {
-      dispatch(ActionCreator.authorization(true));
-      dispatch(ActionCreator.setUserInfo(data));
-      dispatch(ActionCreator.redirect(`/`));
+      dispatch(authorizationAction(true));
+      dispatch(setUserInfoAction(data));
+      dispatch(redirectAction(`/`));
     } else {
-      dispatch(ActionCreator.authorization(false));
+      dispatch(authorizationAction(false));
     }
   });
 };
 
 export const sendComment = ({id, comment, rating}) => (dispatch, _getState, api) => {
-  dispatch(ActionCreator.sendFormData(false));
+  dispatch(sendFormDataAction(false));
   api.post(`/comments/${id}`, {
     rating,
     comment
   }).then(() => {
-    dispatch(ActionCreator.sendFormData(true));
-    dispatch(ActionCreator.redirect(`/films/${id}`));
+    dispatch(sendFormDataAction(true));
+    dispatch(redirectAction(`/films/${id}`));
   })
   .catch(() => {
-    dispatch(ActionCreator.showError(true));
+    dispatch(showErrorAction(true));
   });
 };

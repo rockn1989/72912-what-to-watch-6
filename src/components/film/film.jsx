@@ -93,14 +93,11 @@ const Film = ({id, loadingFilm, film, films, auth, avatar}) => {
             </div>
 
             <div className="movie-card__desc">
-
               <Tabs tabsTitle={tabsTitle} {...film}>
                 <Overview film={film}/>
                 <Details film={film}/>
                 <Reviews reviews={reviews}/>
               </Tabs>
-
-
             </div>
           </div>
         </div>
