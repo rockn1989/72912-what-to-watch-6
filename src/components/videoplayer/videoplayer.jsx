@@ -43,4 +43,4 @@ VideoPlayer.propTypes = {
   isActive: propTypes.bool.isRequired
 };
 
-export default VideoPlayer;
+export default React.memo(VideoPlayer);

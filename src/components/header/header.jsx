@@ -41,4 +41,4 @@ Header.propTypes = {
   avatar: propTypes.string.isRequired
 };
 
-export default Header;
+export default React.memo(Header);

@@ -1,31 +1,24 @@
-import React, {PureComponent} from 'react';
+import React, {useState} from 'react';
+import propTypes from 'prop-types';
 
-const withTabs = (WrappedComponent) => {
-  class WithTabs extends PureComponent {
-    constructor(props) {
-      super(props);
-      this.state = {
-        activeTab: 0
-      };
+const withTabs = (Component) => {
+  const withTabsWrapper = (props) => {
+    const [activeTab, setActiveTab] = useState(0);
+    const onClickHandler = (tab) => {
+      setActiveTab(tab);
+    };
 
-      this.onClickHandler = this.onClickHandler.bind(this);
-    }
+    return (
+      <Component onChangeActiveItem={onClickHandler} activeTab={activeTab} {...props}/>
+    );
+  };
+  return withTabsWrapper;
+};
 
-    onClickHandler(tab) {
-      this.setState({
-        activeTab: tab,
-      });
-    }
 
-    render() {
-      const {activeTab} = this.state;
-      return <WrappedComponent onChangeActiveItem={this.onClickHandler} activeTab={activeTab} {...this.props} />;
-    }
-  }
-
-  WithTabs.propTypes = {};
-
-  return WithTabs;
+withTabs.propTypes = {
+  Component: propTypes.any.isRequired,
 };
 
 export default withTabs;
+

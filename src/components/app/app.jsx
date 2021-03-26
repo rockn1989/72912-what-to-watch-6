@@ -15,6 +15,12 @@ import PrivateRoute from '../private-route/private-route';
 import {connect} from 'react-redux';
 import {loadFilmsList, loadFilm, login, sendLogin, sendComment} from "../../store/api-actions";
 
+import {getFilms} from '../../store/films-data/selectors';
+import {getFilm} from '../../store/film-data/selectors';
+import {getFormStatus} from '../../store/form-status/selectors';
+import {getErrorStatus} from '../../store/error-status/selectors';
+import {getAuthStatus, getUserAvatar} from '../../store/user/selectors';
+
 const App = ({
   films,
   loadFilms,
@@ -89,14 +95,14 @@ App.propTypes = {
   avatar: propTypes.string.isRequired,
 };
 
-const mapStateToProps = ({films, film, authorizationStatus, userInfo, formStatus, error}) => {
+const mapStateToProps = (state) => {
   return {
-    films,
-    film,
-    authorizationStatus,
-    avatar: userInfo.avatarUrl,
-    formStatus,
-    error
+    films: getFilms(state),
+    film: getFilm(state),
+    authorizationStatus: getAuthStatus(state),
+    avatar: getUserAvatar(state),
+    formStatus: getFormStatus(state),
+    error: getErrorStatus(state)
   };
 };
 

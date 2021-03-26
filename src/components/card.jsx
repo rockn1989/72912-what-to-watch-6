@@ -9,10 +9,13 @@ const Card = ({id, img, previewVideolink, isActive, title, onHoverHandler}) => {
     onHoverHandler(parseInt(evt.currentTarget.id, 10));
   };
 
-
   const onMouseLeaveHandler = () => {
     onHoverHandler(null);
   };
+
+  const linkTo = React.useMemo(() => {
+    return <Link className="small-movie-card__link" to={`/films/${id}`}>{title}</Link>;
+  }, [id]);
 
   return (
     <article id={id} onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler} className="small-movie-card catalog__movies-card">
@@ -20,7 +23,7 @@ const Card = ({id, img, previewVideolink, isActive, title, onHoverHandler}) => {
         <VideoPlayer isActive={isActive} posterImage={img} previewVideo={previewVideolink}/>
       </div>
       <h3 className="small-movie-card__title">
-        <Link className="small-movie-card__link" to={`/films/${id}`}>{title}</Link>
+        {linkTo}
       </h3>
     </article>
   );
@@ -35,4 +38,4 @@ Card.propTypes = {
   onHoverHandler: propTypes.func
 };
 
-export default Card;
+export default React.memo(Card);
