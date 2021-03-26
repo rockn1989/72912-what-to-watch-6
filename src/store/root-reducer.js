@@ -21,11 +21,3 @@ export default combineReducers({
   [NameSpace.FORM_STATUS]: formStatus,
   [NameSpace.ERROR_STATUS]: errorStatus,
 });
-
-// export default combineReducers({
-//   filmsData,
-//   genre,
-//   user,
-//   formStatus,
-//   errorStatus,
-// });

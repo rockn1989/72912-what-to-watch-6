@@ -95,17 +95,6 @@ App.propTypes = {
   avatar: propTypes.string.isRequired,
 };
 
-// const mapStateToProps = ({films, film, authorizationStatus, userInfo, formStatus, error}) => {
-//   return {
-//     films,
-//     film,
-//     authorizationStatus,
-//     avatar: userInfo.avatarUrl,
-//     formStatus,
-//     error
-//   };
-// };
-
 const mapStateToProps = (state) => {
   return {
     films: getFilms(state),

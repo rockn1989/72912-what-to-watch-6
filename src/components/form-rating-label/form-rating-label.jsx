@@ -11,7 +11,7 @@ const FormRatingLabel = ({idx, onCheckRatingHandler, formStatus}) => {
         name="rating"
         value={idx + 1}
         onChange={onCheckRatingHandler}
-        disabled={formStatus ? false : true}
+        disabled={!formStatus}
       />
       <label className="rating__label" htmlFor={`star-${idx + 1}`}>Rating {idx + 1}</label>
     </React.Fragment>
