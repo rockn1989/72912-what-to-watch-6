@@ -7,6 +7,14 @@ export const getFilm = (state) => state[NameSpace.FILMS_DATA].film;
 export const getFilmsCounter = (state) => state[NameSpace.FILMS_DATA].filmsCounter;
 export const getFilmGenre = (state) => state[NameSpace.FILMS_DATA].genre;
 
+export const getGenresList = createSelector(
+    getFilms,
+    (films) => {
+      const newGenreList = [{genre: `All genres`}, ...films];
+      return new Set(newGenreList.map((genreType) => genreType.genre));
+    }
+);
+
 export const getCurrentCounter = createSelector(
     getFilmGenre,
     getFilmsCounter,
@@ -15,7 +23,7 @@ export const getCurrentCounter = createSelector(
     }
 );
 
-export const getFiltredFilms = createSelector(
+export const getFiltredFilmsByGenre = createSelector(
     getFilmGenre,
     getFilms,
     (genre, films) => {
@@ -24,9 +32,18 @@ export const getFiltredFilms = createSelector(
 );
 
 export const getFiltredFilmsByCounter = createSelector(
-    getFiltredFilms,
+    getFiltredFilmsByGenre,
     getCurrentCounter,
     (films, {counter}) => {
       return films.slice(0, (counter + 1) * MAX_FILMS);
     }
 );
+
+export const getPromoFilm = createSelector(
+    getFiltredFilmsByGenre,
+    (films) => {
+      const sortedFilms = [...films];
+      return sortedFilms.sort((a, b) => b.rating - a.rating)[0];
+    }
+);
+

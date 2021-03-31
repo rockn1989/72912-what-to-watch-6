@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import propTypes from 'prop-types';
 
 import Card from '../card';
+import {adapterFilmData} from '../../service/adapters';
 
 const CardList = ({filmsList}) => {
   const [activeCard, setActiveCard] = useState(null);
@@ -10,10 +11,11 @@ const CardList = ({filmsList}) => {
     setActiveCard(id);
   }, [activeCard]);
 
-
-  const cards = filmsList.map(({name, id, poster_image: posterImage, video_link: previewVideolink}, idx) => {
+  const cards = filmsList.map((film, idx) => {
+    const {name, id, posterImage, previewVideoLink} = adapterFilmData(film);
     const isActive = id === activeCard;
-    return <Card key={`${name}_${idx}`} onHoverHandler={onHoverHandler} id={id} img={posterImage} previewVideolink={previewVideolink} title={name} isActive={isActive} />;
+
+    return <Card key={`${name}_${idx}`} onHoverHandler={onHoverHandler} id={id} img={posterImage} previewVideolink={previewVideoLink} title={name} isActive={isActive} />;
   });
 
   return cards;

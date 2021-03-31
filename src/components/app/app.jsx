@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
-import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
-import browserHistory from '../../browser-history';
+import React from "react";
+import {Switch, Route} from "react-router-dom";
 import propTypes from "prop-types";
+
 
 import Welcome from "../main/main";
 import SignIn from "../sign-in/sign-in";
@@ -10,73 +10,76 @@ import Film from "../film/film";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 import PageNotFound from "../page-not-found/page-not-found";
-import Preloader from '../preloader/preloader';
 import PrivateRoute from '../private-route/private-route';
-import {connect} from 'react-redux';
-import {loadFilmsList, loadFilm, login, sendLogin, sendComment} from "../../store/api-actions";
 
-import {getFilms} from '../../store/films-data/selectors';
+import {connect} from 'react-redux';
+
+import {setGenreAction, showMoreAction, setFilmsCounterAction} from '../../store/action';
+import {loadFilm, sendComment} from "../../store/api-actions";
+
+import {getFilms, getFilmGenre, getGenresList, getFiltredFilmsByCounter, getPromoFilm, getCurrentCounter} from '../../store/films-data/selectors';
 import {getFilm} from '../../store/film-data/selectors';
 import {getFormStatus} from '../../store/form-status/selectors';
 import {getErrorStatus} from '../../store/error-status/selectors';
-import {getAuthStatus, getUserAvatar} from '../../store/user/selectors';
 
 const App = ({
   films,
-  loadFilms,
   film,
-  loadingFilm,
-  checkLogin,
-  authorizationStatus,
-  sendLoginData,
-  sendUserComment,
+  onLoadingFilm,
+  onSendUserComment,
   formStatus,
   error,
-  avatar}) => {
 
-  useEffect(() => {
-    loadFilms();
-    checkLogin();
-  }, []);
+  genre,
+  genresList,
+  filtredFilms,
+  currentCounter,
+  promo,
+  setFilmsCounter,
+  setGenre,
+  showMore
+}) => {
 
   return (
-    <BrowserRouter history={browserHistory}>
-      <Switch>
-        <Route path="/" exact render={({location}) => {
-          return films.length > 0 ? <Welcome filmsList={films} location={location} auth={authorizationStatus} avatar={avatar} /> : <Preloader />;
-        }}>
-        </Route>
+    <Switch>
+      <Route path="/" exact render={() => {
+        return <Welcome
+          filtredFilms={filtredFilms}
+          genre={genre}
+          genresList={genresList}
+          currentCounter={currentCounter}
+          promo={promo}
+          setFilmsCounter={setFilmsCounter}
+          setGenre={setGenre}
+          showMore={showMore}
+        />;
+      }}>
+      </Route>
 
-        <Route path="/login" exact render={() => {
-          return <SignIn sendLogin={sendLoginData} auth={authorizationStatus}/>;
-        }} />
+      <Route path="/login" exact render={() => <SignIn />} />
 
-        <Route path="/mylist" exact render={() => <MyList films={films} />} />
+      <Route path="/mylist" exact render={() => <MyList films={films} />} />
 
-        <Route path="/films/:id" exact render={({match}) => {
-          const id = match.params.id;
-          return <Film loadingFilm={loadingFilm} films={films} film={film} id={id} auth={authorizationStatus} avatar={avatar} />;
-        }} />
+      <Route path="/films/:id" exact render={() => {
+        return <Film onLoadingFilm={onLoadingFilm} />;
+      }} />
 
-        <PrivateRoute path="/films/:id/review" authorizationStatus={authorizationStatus} exact component={() => {
-          return <AddReview sendComment={sendUserComment}
-            error={error}
-            film={film}
-            formStatus={formStatus}
-            auth={authorizationStatus}
-            avatar={avatar}
-          />;
-        }
-        }/>
+      <PrivateRoute path="/films/:id/review" exact component={() => {
+        return <AddReview onSendUserComment={onSendUserComment}
+          error={error}
+          film={film}
+          formStatus={formStatus}
+        />;
+      }
+      }/>
 
-        <Route path="/player/:id" exact render={({match}) => {
-          const id = match.params.id;
-          return <Player films={films} id={id} />;
-        }} />
+      <Route path="/player/:id" exact render={({match}) => {
+        const id = match.params.id;
+        return <Player onLoadingFilm={onLoadingFilm} film={film} id={id} />;
+      }} />
 
-        <Route path="*" render={() => <PageNotFound />} />
-      </Switch>
-    </BrowserRouter>
+      <Route path="*" render={() => <PageNotFound />} />
+    </Switch>
   );
 };
 
@@ -84,44 +87,53 @@ const App = ({
 App.propTypes = {
   films: propTypes.arrayOf(propTypes.object).isRequired,
   film: propTypes.object.isRequired,
-  loadFilms: propTypes.func.isRequired,
-  loadingFilm: propTypes.func.isRequired,
-  checkLogin: propTypes.func.isRequired,
-  sendLoginData: propTypes.func.isRequired,
-  sendUserComment: propTypes.func.isRequired,
-  authorizationStatus: propTypes.bool.isRequired,
+  onLoadingFilm: propTypes.func.isRequired,
+  onSendUserComment: propTypes.func.isRequired,
   formStatus: propTypes.bool.isRequired,
   error: propTypes.bool.isRequired,
-  avatar: propTypes.string.isRequired,
+
+  genre: propTypes.string.isRequired,
+  genresList: propTypes.object.isRequired,
+  filtredFilms: propTypes.arrayOf(propTypes.object).isRequired,
+  currentCounter: propTypes.object.isRequired,
+  promo: propTypes.object,
+  setFilmsCounter: propTypes.func.isRequired,
+  setGenre: propTypes.func.isRequired,
+  showMore: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     films: getFilms(state),
     film: getFilm(state),
-    authorizationStatus: getAuthStatus(state),
-    avatar: getUserAvatar(state),
     formStatus: getFormStatus(state),
-    error: getErrorStatus(state)
+    error: getErrorStatus(state),
+
+    genre: getFilmGenre(state),
+    genresList: getGenresList(state),
+    filtredFilms: getFiltredFilmsByCounter(state),
+    currentCounter: getCurrentCounter(state),
+    promo: getPromoFilm(state)
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  loadFilms() {
-    dispatch(loadFilmsList());
-  },
-  loadingFilm(payload) {
+  onLoadingFilm(payload) {
     dispatch(loadFilm(payload));
   },
-  checkLogin() {
-    dispatch(login());
-  },
-  sendLoginData(payload) {
-    dispatch(sendLogin(payload));
-  },
-  sendUserComment(payload) {
+  onSendUserComment(payload) {
     dispatch(sendComment(payload));
-  }
+  },
+
+  setGenre(payload) {
+    dispatch(setGenreAction(payload));
+  },
+  showMore() {
+    dispatch(showMoreAction());
+  },
+  setFilmsCounter(payload) {
+    dispatch(setFilmsCounterAction(payload));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

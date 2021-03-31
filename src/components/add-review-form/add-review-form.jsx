@@ -9,7 +9,7 @@ const errorStyle = {
   color: `red`
 };
 
-const AddReviewForm = ({sendComment, id, formStatus, error}) => {
+const AddReviewForm = ({onSendUserCommentHandler, id, formStatus, error}) => {
   const [formData, setFormData] = useState({
     rating: 0,
     message: ``,
@@ -24,7 +24,7 @@ const AddReviewForm = ({sendComment, id, formStatus, error}) => {
       rating: formData.rating
     };
 
-    sendComment(CommentPost);
+    onSendUserCommentHandler(CommentPost);
   };
 
   const onChangeHandler = (evt) => {
@@ -85,7 +85,7 @@ const AddReviewForm = ({sendComment, id, formStatus, error}) => {
 
 AddReviewForm.propTypes = {
   id: propTypes.number.isRequired,
-  sendComment: propTypes.func.isRequired,
+  onSendUserCommentHandler: propTypes.func.isRequired,
   formStatus: propTypes.bool.isRequired,
   error: propTypes.bool.isRequired
 };

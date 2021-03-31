@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should PageNotFound render correctly 1`] = `
+<div>
+  <div
+    class="page-not-found"
+  >
+    <h1>
+      Страница не найдена
+    </h1>
+    <a
+      href="/"
+    >
+      Вернуться на главную
+    </a>
+  </div>
+</div>
+`;

@@ -1,9 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import propTypes from 'prop-types';
+import {useSelector} from 'react-redux';
+import {NameSpace} from '../../store/root-reducer';
 
 const Header = (props) => {
-  const {className, auth, avatar} = props;
+  const {className} = props;
+  const {authorizationStatus: auth, userInfo: {avatarUrl: avatar}} = useSelector((state) => state[NameSpace.USER]);
 
   return (
     <header className={`page-header ${className}`}>
@@ -37,8 +40,6 @@ const Header = (props) => {
 Header.propTypes = {
   className: propTypes.string,
   children: propTypes.any,
-  auth: propTypes.bool.isRequired,
-  avatar: propTypes.string.isRequired
 };
 
 export default React.memo(Header);

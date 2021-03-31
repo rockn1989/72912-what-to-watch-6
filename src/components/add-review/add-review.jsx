@@ -4,10 +4,11 @@ import AddReviewForm from '../add-review-form/add-review-form';
 import Header from '../header/header';
 import BreadCrumbs from '../breadcrumbs/breadcrumbs';
 import Preloader from '../preloader/preloader';
+import {adapterFilmData} from "../../service/adapters";
 
-const AddReview = ({sendComment, film, auth, avatar, formStatus, error}) => {
+const AddReview = ({onSendUserComment, film, formStatus, error}) => {
 
-  const {name, poster_image: posterImage, background_image: backgroundImage, id} = film;
+  const {name, posterImage, backgroundImage, id} = adapterFilmData(film);
 
   if (Object.keys(film).length === 0) {
     return <Preloader />;
@@ -22,7 +23,7 @@ const AddReview = ({sendComment, film, auth, avatar, formStatus, error}) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header auth={auth} avatar={avatar}>
+        <Header>
           <BreadCrumbs id={id} name={name} />
         </Header>
 
@@ -31,16 +32,14 @@ const AddReview = ({sendComment, film, auth, avatar, formStatus, error}) => {
         </div>
       </div>
 
-      <AddReviewForm sendComment={sendComment} id={id} formStatus={formStatus} error={error} />
+      <AddReviewForm onSendUserCommentHandler={onSendUserComment} id={id} formStatus={formStatus} error={error} />
     </section>
   );
 };
 
 AddReview.propTypes = {
   film: propTypes.object.isRequired,
-  auth: propTypes.bool.isRequired,
-  avatar: propTypes.string.isRequired,
-  sendComment: propTypes.func.isRequired,
+  onSendUserComment: propTypes.func.isRequired,
   formStatus: propTypes.bool.isRequired,
   error: propTypes.bool.isRequired,
 };

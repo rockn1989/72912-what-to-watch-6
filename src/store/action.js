@@ -1,15 +1,14 @@
 export const ActionType = {
-  SET_ACTIVE_GENRE: `set_genre`,
-  SHOW_MORE: `show_more`,
-  SET_FILMS_COUNTER: `set_films_counter`,
-  RESET_FILMS_COUNTER: `reset_films_counter`,
-  LOAD_FILMS: `load_films`,
-  LOAD_FILM: `load_film`,
-  AUTHORIZED: `authorized`,
-  SET_USER_INFO: `set_user_info`,
+  SET_ACTIVE_GENRE: `films/set_genre`,
+  SHOW_MORE: `films/show_more`,
+  SET_FILMS_COUNTER: `films/set_films_counter`,
+  LOAD_FILMS: `films/load_films`,
+  LOAD_FILM: `films/id/load_film`,
+  AUTHORIZED: `user/authorized`,
+  SET_USER_INFO: `user/set_user_info`,
+  SEND_COMMENT: `user/send_comment`,
   REDIRECT_TO_ROUTE: `redirect_to_route`,
-  SEND_COMMENT: `send_comment`,
-  SEND_FORM_DATA: `send_form_data`,
+  SEND_FORM_DATA: `form/send_form_data`,
   SHOW_ERROR: `show_error`
 };
 
@@ -35,10 +34,6 @@ export const showMoreAction = () => ({
 export const setFilmsCounterAction = (counters) => ({
   type: ActionType.SET_FILMS_COUNTER,
   payload: counters
-});
-
-export const resetFilmsCounterAction = () => ({
-  type: ActionType.RESET_FILMS_COUNTER
 });
 
 export const authorizationAction = (status) => ({

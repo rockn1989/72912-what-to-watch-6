@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should PageNotFound render correctly 1`] = `
+<div>
+  <div
+    class="movie-rating"
+  >
+    <div
+      class="movie-rating__score"
+    />
+    <p
+      class="movie-rating__meta"
+    >
+      <span
+        class="movie-rating__level"
+      >
+        Very good
+      </span>
+      <span
+        class="movie-rating__count"
+      >
+         ratings
+      </span>
+    </p>
+  </div>
+  <div
+    class="movie-card__text"
+  >
+    <p />
+    <p
+      class="movie-card__director"
+    >
+      <strong>
+        Director: 
+      </strong>
+    </p>
+    <p
+      class="movie-card__starring"
+    >
+      <strong>
+        Starring: 
+        Man, 
+        Woman
+      </strong>
+    </p>
+  </div>
+</div>
+`;

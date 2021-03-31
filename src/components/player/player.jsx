@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import propTypes from "prop-types";
 
-const Player = ({films, id}) => {
-  const [film] = films.filter((filmItem) => filmItem.id === parseInt(id, 10));
+const Player = ({onLoadingFilm, film, id}) => {
   const {poster_image: posterImage, video_link: videoLink} = film;
+
+  useEffect(() => {
+    onLoadingFilm(id);
+  }, [id]);
 
   return (
     <div className="player">
@@ -54,7 +57,8 @@ const Player = ({films, id}) => {
 };
 
 Player.propTypes = {
-  films: propTypes.array,
+  onLoadingFilm: propTypes.func.isRequired,
+  film: propTypes.object.isRequired,
   id: propTypes.string.isRequired
 };
 

@@ -2,9 +2,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 
-const GenresList = ({genre, setGenre, genresName}) => {
+const GenresList = ({genre, setGenre, genresList}) => {
 
-  const genres = [...genresName].map((genreName, idx) => {
+  const genres = [...genresList].map((genreName, idx) => {
     const activeGenreClass = genreName === genre ? `catalog__genres-item--active` : ``;
 
     return (
@@ -28,9 +28,8 @@ const GenresList = ({genre, setGenre, genresName}) => {
 
 GenresList.propTypes = {
   genre: propTypes.string.isRequired,
-  genresName: propTypes.any.isRequired,
-  setGenre: propTypes.func.isRequired,
-  filmsList: propTypes.array.isRequired
+  genresList: propTypes.any.isRequired,
+  setGenre: propTypes.func.isRequired
 };
 
 export default GenresList;

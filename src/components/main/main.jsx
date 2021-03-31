@@ -6,75 +6,63 @@ import Header from '../header/header';
 import GenresList from "../genres-list/genres-list";
 import ShowMore from '../show-more/show-more';
 import {MAX_FILMS} from '../../const';
-import {connect} from 'react-redux';
-import {setGenreAction, showMoreAction, setFilmsCounterAction, resetFilmsCounterAction} from '../../store/action';
 
-import {getFiltredFilms, getFilmsCounter, getFilmGenre, getFiltredFilmsByCounter} from '../../store/films-data/selectors';
+import {adapterFilmData} from '../../service/adapters';
+import Preloader from '../preloader/preloader';
 
 const Welcome = ({
-  location,
   genre,
-  filmsList,
-  setGenre,
+  genresList,
   filtredFilms,
+  currentCounter,
+  promo,
+  setGenre,
   showMore,
-  filmsCounter,
   setFilmsCounter,
-  resetFilmsCounter,
-  auth,
-  avatar,
-  countedFilms
 }) => {
 
   const history = useHistory();
 
-  const newGenreList = [{genre: `All genres`}, ...filmsList];
+  useEffect(() => {
+    setFilmsCounter(genresList);
+  }, []);
 
-  const genresName = new Set(newGenreList.map((genreType) => genreType.genre));
-
-  if (filmsCounter.length === 0) {
-    setFilmsCounter(genresName);
+  if (filtredFilms.length === 0) {
+    return <Preloader />;
   }
 
-  const currentGenre = filmsCounter.filter(({name}) => name === genre).reduce((acc, item) => {
-    acc[item] = item;
-    return item;
-  }, {});
-
-  useEffect(() => {
-    resetFilmsCounter();
-  }, [location]);
+  const promoFilm = adapterFilmData(promo);
 
   return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
           <img
-            src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="The Grand Budapest Hotel"
+            src={promoFilm.backgroundImage}
+            alt={promoFilm.name}
           />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header auth={auth} avatar={avatar} />
+        <Header />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
+                src={promoFilm.posterImage}
+                alt={promoFilm.name}
                 width="218"
                 height="327"
               />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">Test name</h2>
+              <h2 className="movie-card__title">{promoFilm.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Test name</span>
-                <span className="movie-card__year">Test name</span>
+                <span className="movie-card__genre">{promoFilm.genre}</span>
+                <span className="movie-card__year">{promoFilm.released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -109,14 +97,14 @@ const Welcome = ({
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList genre={genre} filmsList={filmsList} setGenre={setGenre} genresName={genresName}/>
+          <GenresList genre={genre} filmsList={filtredFilms} setGenre={setGenre} genresList={genresList}/>
 
           <div className="catalog__movies-list">
-            <CardList filmsList={countedFilms} currentGenre={currentGenre} />
+            <CardList filmsList={filtredFilms} />
           </div>
 
           <div className="catalog__more">
-            { ((filtredFilms.length - (MAX_FILMS * currentGenre.counter)) - MAX_FILMS) > 0 && <ShowMore showMore={showMore} />}
+            { (filtredFilms.length - MAX_FILMS * currentCounter.counter) >= MAX_FILMS && <ShowMore onShowMoreClick={showMore} />}
           </div>
         </section>
 
@@ -139,43 +127,15 @@ const Welcome = ({
 };
 
 Welcome.propTypes = {
-  location: propTypes.object.isRequired,
-  filtredFilms: propTypes.arrayOf(propTypes.object).isRequired,
   genre: propTypes.string.isRequired,
-  filmsList: propTypes.array.isRequired,
+  genresList: propTypes.object.isRequired,
+  filtredFilms: propTypes.arrayOf(propTypes.object).isRequired,
+  currentCounter: propTypes.object.isRequired,
+  promo: propTypes.object,
+  setFilmsCounter: propTypes.func.isRequired,
   setGenre: propTypes.func.isRequired,
   showMore: propTypes.func.isRequired,
-  resetFilmsCounter: propTypes.func.isRequired,
-  setFilmsCounter: propTypes.func.isRequired,
-  filmsCounter: propTypes.array.isRequired,
-  countedFilms: propTypes.array.isRequired,
-  auth: propTypes.bool.isRequired,
-  avatar: propTypes.string.isRequired
 };
 
 
-const mapStateToProps = (state) => {
-  return {
-    genre: getFilmGenre(state),
-    filtredFilms: getFiltredFilms(state),
-    filmsCounter: getFilmsCounter(state),
-    countedFilms: getFiltredFilmsByCounter(state)
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  setGenre(payload) {
-    dispatch(setGenreAction(payload));
-  },
-  showMore() {
-    dispatch(showMoreAction());
-  },
-  setFilmsCounter(payload) {
-    dispatch(setFilmsCounterAction(payload));
-  },
-  resetFilmsCounter() {
-    dispatch(resetFilmsCounterAction());
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
+export default Welcome;

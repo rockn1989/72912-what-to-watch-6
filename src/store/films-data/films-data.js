@@ -34,18 +34,6 @@ const filmsData = (state = initialState, action) => {
         filmsCounter: [...counters]
       };
 
-    case ActionType.RESET_FILMS_COUNTER:
-      const resetFilmsCounter = state.filmsCounter.map((counter) => {
-        return {
-          name: counter.name,
-          counter: 0
-        };
-      });
-      return {
-        ...state,
-        filmsCounter: [...resetFilmsCounter]
-      };
-
     case ActionType.SHOW_MORE:
       const genreCounter = state.filmsCounter.filter(({name}) => name === state.genre);
       const idx = state.filmsCounter.indexOf(...genreCounter);
