@@ -62,7 +62,6 @@ const Player = ({onLoadingFilm, id}) => {
 
 Player.propTypes = {
   onLoadingFilm: propTypes.func.isRequired,
-  film: propTypes.object.isRequired,
   id: propTypes.string.isRequired
 };
 

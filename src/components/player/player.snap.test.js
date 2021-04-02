@@ -31,12 +31,10 @@ const store = mockStore({
 it(`Should MyList render correctly`, () => {
   jest.spyOn(redux, `useSelector`);
   const history = createMemoryHistory();
-
   const {container} = render(
       <redux.Provider store={store}>
         <Router history={history}>
-          <Player onLoadingFilm={jest.fn()}
-            film={store[NameSpace.FILM_DATA.film]}
+          <Player onLoadingFilm={jest.fn()} id={`1`}
           />
         </Router>
       </redux.Provider>
