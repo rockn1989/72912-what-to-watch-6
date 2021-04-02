@@ -2,7 +2,7 @@ import React from 'react';
 import {render} from '@testing-library/react';
 import {NameSpace} from '../../store/root-reducer';
 
-import VideoPlayer from './VideoPlayer';
+import VideoPlayer from './videoplayer';
 import films from '../../mocks/films';
 
 const store = {
