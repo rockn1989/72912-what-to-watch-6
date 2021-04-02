@@ -1,6 +1,5 @@
 import React from "react";
-import CardList from "../card-list/card-list";
-import propTypes from "prop-types";
+import CardList from '../card-list/card-list';
 import Header from '../header/header';
 
 import {useSelector} from 'react-redux';
@@ -38,10 +37,6 @@ const MyList = () => {
       </footer>
     </div>
   );
-};
-
-MyList.propTypes = {
-  films: propTypes.arrayOf(propTypes.object).isRequired,
 };
 
 export default MyList;

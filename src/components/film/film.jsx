@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React, {useEffect} from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
 import {NameSpace} from '../../store/root-reducer';
 import {useSelector} from 'react-redux';
-import propTypes from "prop-types";
+import propTypes from 'prop-types';
 import Header from '../header/header';
 import CardList from '../card-list/card-list';
 import Tabs from '../tabs/tabs';

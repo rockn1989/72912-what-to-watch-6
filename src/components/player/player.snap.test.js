@@ -2,12 +2,14 @@ import React from 'react';
 import {render} from '@testing-library/react';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
-import AddReview from './add-review';
+import * as redux from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {NameSpace} from '../../store/root-reducer';
-import * as redux from 'react-redux';
 
+import Player from './player';
+import films from '../../mocks/films';
 const mockStore = configureStore({});
+
 const store = mockStore({
   [NameSpace.USER]: {
     authorizationStatus: false,
@@ -15,13 +17,8 @@ const store = mockStore({
       avatarUrl: `img/avatar.jpg`
     }
   },
-  [NameSpace.FILMS_DATA]: {
-    genre: `All genres`,
-    filmsCounter: [],
-    films: []
-  },
   [NameSpace.FILM_DATA]: {
-    film: {id: 1, genre: `Comedy`, name: `test`}
+    film: films[0]
   },
   [NameSpace.FORM_STATUS]: {
     formStatus: true
@@ -31,25 +28,19 @@ const store = mockStore({
   }
 });
 
-it(`Should AddReview render correctly`, () => {
+it(`Should MyList render correctly`, () => {
   jest.spyOn(redux, `useSelector`);
   const history = createMemoryHistory();
-  const film = {id: 1, genre: `Comedy`, name: `test`};
-  const ava = `img/avatar.jpg`;
 
   const {container} = render(
       <redux.Provider store={store}>
         <Router history={history}>
-          <AddReview
-            formStatus
-            auth={true}
-            avatar={ava}
-            film={film}
-            onSendUserComment={jest.fn()}
-            error={false}
+          <Player onLoadingFilm={jest.fn()}
+            film={store[NameSpace.FILM_DATA.film]}
           />
         </Router>
       </redux.Provider>
   );
+
   expect(container).toMatchSnapshot();
 });

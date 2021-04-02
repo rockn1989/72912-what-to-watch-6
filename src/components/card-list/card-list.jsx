@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import propTypes from 'prop-types';
 
-import Card from '../card';
+import Card from '../card/card';
 import {adapterFilmData} from '../../service/adapters';
 
 const CardList = ({filmsList}) => {

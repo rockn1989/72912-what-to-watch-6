@@ -1,9 +1,9 @@
-import React, {useEffect} from "react";
-import CardList from "../card-list/card-list";
-import propTypes from "prop-types";
-import {useHistory} from "react-router-dom";
+import React, {useEffect} from 'react';
+import CardList from '../card-list/card-list';
+import propTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
 import Header from '../header/header';
-import GenresList from "../genres-list/genres-list";
+import GenresList from '../genres-list/genres-list';
 import ShowMore from '../show-more/show-more';
 import {MAX_FILMS} from '../../const';
 

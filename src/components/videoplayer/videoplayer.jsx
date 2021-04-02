@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import propTypes from "prop-types";
+import propTypes from 'prop-types';
 
 const VideoPlayer = (props) => {
   const {posterImage, previewVideo, isActive} = props;
@@ -30,7 +30,7 @@ const VideoPlayer = (props) => {
   }, [isActive]);
 
   return (
-    <video muted poster={posterImage} src={previewVideo} style={videoStyle} ref={video}></video>
+    <video poster={posterImage} src={previewVideo} style={videoStyle} ref={video}></video>
   );
 };
 

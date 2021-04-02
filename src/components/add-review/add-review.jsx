@@ -1,10 +1,10 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 import AddReviewForm from '../add-review-form/add-review-form';
 import Header from '../header/header';
 import BreadCrumbs from '../breadcrumbs/breadcrumbs';
 import Preloader from '../preloader/preloader';
-import {adapterFilmData} from "../../service/adapters";
+import {adapterFilmData} from '../../service/adapters';
 
 const AddReview = ({onSendUserComment, film, formStatus, error}) => {
 

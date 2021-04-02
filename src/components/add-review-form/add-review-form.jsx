@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import propTypes from "prop-types";
+import propTypes from 'prop-types';
 import FormRatingLabel from '../form-rating-label/form-rating-label';
 
 const errorStyle = {

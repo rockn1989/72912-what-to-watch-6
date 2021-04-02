@@ -1,8 +1,12 @@
-import React, {useEffect} from "react";
-import propTypes from "prop-types";
+import React, {useEffect} from 'react';
+import {useSelector} from 'react-redux';
+import propTypes from 'prop-types';
+import {adapterFilmData} from '../../service/adapters';
+import {NameSpace} from '../../store/root-reducer';
 
-const Player = ({onLoadingFilm, film, id}) => {
-  const {poster_image: posterImage, video_link: videoLink} = film;
+const Player = ({onLoadingFilm, id}) => {
+  const {film} = useSelector((state) => state[NameSpace.FILM_DATA]);
+  const {posterImage, videoLink} = adapterFilmData(film);
 
   useEffect(() => {
     onLoadingFilm(id);

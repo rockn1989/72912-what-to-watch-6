@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import {Link} from 'react-router-dom';
-import propTypes from "prop-types";
-import VideoPlayer from '../components/videoplayer/videoplayer';
+import propTypes from 'prop-types';
+import VideoPlayer from '../videoplayer/videoplayer';
 
 const Card = ({id, img, previewVideolink, isActive, title, onHoverHandler}) => {
 
