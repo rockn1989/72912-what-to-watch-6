@@ -1,22 +1,19 @@
 import React, {useEffect, useRef} from 'react';
-import propTypes from "prop-types";
+import propTypes from 'prop-types';
 
 const VideoPlayer = (props) => {
   const {posterImage, previewVideo, isActive} = props;
-  const video = useRef(null);
+  const video = useRef();
 
   let timerId = null;
 
   const videoStyle = {
-    width: `100%`,
-    height: `100%`,
+    width: `280px`,
+    height: `175px`,
     objectFit: `cover`
   };
 
   useEffect(() => {
-    video.current.poster = posterImage;
-    video.current.src = previewVideo;
-
     timerId = setTimeout(() => {
       if (isActive) {
         video.current.play();
@@ -33,7 +30,7 @@ const VideoPlayer = (props) => {
   }, [isActive]);
 
   return (
-    <video muted style={videoStyle} ref={video}></video>
+    <video poster={posterImage} src={previewVideo} style={videoStyle} ref={video}></video>
   );
 };
 

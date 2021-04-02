@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Review render correctly 1`] = `
+<div>
+  <div
+    class="movie-card__reviews movie-card__row"
+  >
+    <div
+      class="movie-card__reviews-col"
+    >
+      <div
+        class="review"
+      >
+        <blockquote
+          class="review__quote"
+        >
+          <p
+            class="review__text"
+          >
+            Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.
+          </p>
+          <footer
+            class="review__details"
+          >
+            <cite
+              class="review__author"
+            >
+              Kate Muir
+            </cite>
+            <time
+              class="review__date"
+              dateime="2016-12-24"
+            >
+              December 24, 2018
+            </time>
+          </footer>
+        </blockquote>
+        <div
+          class="review__rating"
+        >
+          8.9
+        </div>
+      </div>
+      <div
+        class="review"
+      >
+        <blockquote
+          class="review__quote"
+        >
+          <p
+            class="review__text"
+          >
+            Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.
+          </p>
+          <footer
+            class="review__details"
+          >
+            <cite
+              class="review__author"
+            >
+              Alex Kim
+            </cite>
+            <time
+              class="review__date"
+              dateime="2016-12-24"
+            >
+              November 13, 2017
+            </time>
+          </footer>
+        </blockquote>
+        <div
+          class="review__rating"
+        >
+          5.9
+        </div>
+      </div>
+      <div
+        class="review"
+      >
+        <blockquote
+          class="review__quote"
+        >
+          <p
+            class="review__text"
+          >
+            Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.
+          </p>
+          <footer
+            class="review__details"
+          >
+            <cite
+              class="review__author"
+            >
+              Gun gun
+            </cite>
+            <time
+              class="review__date"
+              dateime="2016-12-24"
+            >
+              August 4, 2018
+            </time>
+          </footer>
+        </blockquote>
+        <div
+          class="review__rating"
+        >
+          8.2
+        </div>
+      </div>
+    </div>
+    <div
+      class="movie-card__reviews-col"
+    >
+      <div
+        class="review"
+      >
+        <blockquote
+          class="review__quote"
+        >
+          <p
+            class="review__text"
+          >
+            Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.
+          </p>
+          <footer
+            class="review__details"
+          >
+            <cite
+              class="review__author"
+            >
+              Tomy Li Jons
+            </cite>
+            <time
+              class="review__date"
+              dateime="2016-12-24"
+            >
+              Jule 16, 2018
+            </time>
+          </footer>
+        </blockquote>
+        <div
+          class="review__rating"
+        >
+          6.6
+        </div>
+      </div>
+      <div
+        class="review"
+      >
+        <blockquote
+          class="review__quote"
+        >
+          <p
+            class="review__text"
+          >
+            Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.
+          </p>
+          <footer
+            class="review__details"
+          >
+            <cite
+              class="review__author"
+            >
+              Timmy
+            </cite>
+            <time
+              class="review__date"
+              dateime="2016-12-24"
+            >
+              September 3, 2018
+            </time>
+          </footer>
+        </blockquote>
+        <div
+          class="review__rating"
+        >
+          5.5
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Header render correctly 1`] = `
+<div>
+  <header
+    class="page-header undefined"
+  >
+    <div
+      class="logo"
+    >
+      <a
+        class="logo__link"
+        href="/"
+      >
+        <span
+          class="logo__letter logo__letter--1"
+        >
+          W
+        </span>
+        <span
+          class="logo__letter logo__letter--2"
+        >
+          T
+        </span>
+        <span
+          class="logo__letter logo__letter--3"
+        >
+          W
+        </span>
+      </a>
+    </div>
+    <div
+      class="user-block"
+    >
+      <div
+        class="user-block__avatar"
+      >
+        <img
+          alt="User avatar"
+          height="63"
+          src="img/avatar.jpg"
+          width="63"
+        />
+      </div>
+    </div>
+  </header>
+</div>
+`;

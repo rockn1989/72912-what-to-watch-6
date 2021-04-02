@@ -1,9 +1,13 @@
-import React, {useRef} from "react";
+import React, {useRef} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import propTypes from 'prop-types';
+import {NameSpace} from '../../store/root-reducer';
+import {useSelector, useDispatch} from 'react-redux';
+import {sendLogin} from "../../store/api-actions";
 
-const SignIn = ({sendLogin, auth}) => {
+const SignIn = () => {
+  const dispatch = useDispatch();
   const sendForm = useRef(null);
+  const {authorizationStatus: auth} = useSelector((state) => state[NameSpace.USER]);
 
   const sendLoginData = (evt) => {
     evt.preventDefault();
@@ -11,7 +15,7 @@ const SignIn = ({sendLogin, auth}) => {
     userData.email = sendForm.current[`user-email`].value;
     userData.password = sendForm.current[`user-password`].value;
 
-    sendLogin(userData);
+    dispatch(sendLogin(userData));
   };
 
   if (auth) {
@@ -91,9 +95,5 @@ const SignIn = ({sendLogin, auth}) => {
   );
 };
 
-SignIn.propTypes = {
-  sendLogin: propTypes.func.isRequired,
-  auth: propTypes.bool.isRequired
-};
 
 export default SignIn;

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Preloader render correctly 1`] = `
+<div>
+  <div
+    class="preloader"
+    style="margin: 30px auto;"
+  >
+    <p
+      style="font-size: 24px; line-height: 32px; text-align: center; font-weight: bold;"
+    >
+      Loading...
+    </p>
+  </div>
+</div>
+`;

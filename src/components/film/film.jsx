@@ -1,6 +1,8 @@
-import React, {useEffect} from "react";
-import {Link, useHistory} from 'react-router-dom';
-import propTypes from "prop-types";
+import React, {useEffect} from 'react';
+import {Link, useHistory, useParams} from 'react-router-dom';
+import {NameSpace} from '../../store/root-reducer';
+import {useSelector} from 'react-redux';
+import propTypes from 'prop-types';
 import Header from '../header/header';
 import CardList from '../card-list/card-list';
 import Tabs from '../tabs/tabs';
@@ -8,39 +10,43 @@ import Overview from '../overview/overview';
 import Details from '../details/details';
 import Reviews from '../reviews/reviews';
 import reviews from '../../mocks/reviews';
-
+import {adapterFilmData} from '../../service/adapters';
 import Preloader from '../preloader/preloader';
 
 const tabsTitle = [`Overview`, `Details`, `Reviews`];
 
-const Film = ({id, loadingFilm, film, films, auth, avatar}) => {
-
-  const {name, genre, realeased, poster_image: posterImage, background_image: bgImage} = film;
-  const similarMovies = films.filter((filmInfo) => filmInfo.genre === genre);
+const Film = ({onLoadingFilm}) => {
   const history = useHistory();
+  const {id} = useParams();
+  const {film} = useSelector((state) => state[NameSpace.FILM_DATA]);
+  const {films} = useSelector((state) => state[NameSpace.FILMS_DATA]);
+  const {authorizationStatus: auth} = useSelector((state) => state[NameSpace.USER]);
 
   useEffect(() => {
-    loadingFilm(id);
+    onLoadingFilm(id);
   }, [id]);
 
   if (Object.keys(film).length === 0) {
     return <Preloader />;
   }
 
+  const {name, genre, realeased, posterImage, backgroundImage, backgroundColor} = adapterFilmData(film);
+  const similarMovies = films.filter((filmInfo) => filmInfo.genre === genre);
+
   return (
     <React.Fragment>
-      <section className="movie-card movie-card--full">
+      <section className="movie-card movie-card--full" style={{backgroundColor}}>
         <div className="movie-card__hero">
           <div className="movie-card__bg">
             <img
-              src={bgImage}
+              src={backgroundImage}
               alt={name}
             />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header className={`movie-card__head`} auth={auth} avatar={avatar}/>
+          <Header className={`movie-card__head`}/>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -131,12 +137,7 @@ const Film = ({id, loadingFilm, film, films, auth, avatar}) => {
 };
 
 Film.propTypes = {
-  film: propTypes.object.isRequired,
-  films: propTypes.array.isRequired,
-  id: propTypes.string.isRequired,
-  loadingFilm: propTypes.func.isRequired,
-  auth: propTypes.bool.isRequired,
-  avatar: propTypes.string.isRequired,
+  onLoadingFilm: propTypes.func.isRequired,
 };
 
 

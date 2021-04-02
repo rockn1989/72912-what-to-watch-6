@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should FormRatingLabel render correctly 1`] = `
+<div>
+  <input
+    class="rating__input"
+    id="star-2"
+    name="rating"
+    type="radio"
+    value="2"
+  />
+  <label
+    class="rating__label"
+    for="star-2"
+  >
+    Rating 
+    2
+  </label>
+</div>
+`;

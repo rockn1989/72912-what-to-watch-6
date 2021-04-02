@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import {Link} from 'react-router-dom';
-import propTypes from "prop-types";
-import VideoPlayer from '../components/videoplayer/videoplayer';
+import propTypes from 'prop-types';
+import VideoPlayer from '../videoplayer/videoplayer';
 
 const Card = ({id, img, previewVideolink, isActive, title, onHoverHandler}) => {
 
@@ -20,7 +20,11 @@ const Card = ({id, img, previewVideolink, isActive, title, onHoverHandler}) => {
   return (
     <article id={id} onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler} className="small-movie-card catalog__movies-card">
       <div className="small-movie-card__image">
-        <VideoPlayer isActive={isActive} posterImage={img} previewVideo={previewVideolink}/>
+        {
+          isActive
+            ? <VideoPlayer isActive={isActive} posterImage={img} previewVideo={previewVideolink}/>
+            : <img src={img} width="280" height="175"/>
+        }
       </div>
       <h3 className="small-movie-card__title">
         {linkTo}

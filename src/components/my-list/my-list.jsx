@@ -1,9 +1,13 @@
 import React from "react";
-import CardList from "../card-list/card-list";
-import propTypes from "prop-types";
+import CardList from '../card-list/card-list';
 import Header from '../header/header';
 
-const MyList = ({films}) => {
+import {useSelector} from 'react-redux';
+import {NameSpace} from '../../store/root-reducer';
+
+const MyList = () => {
+  const {films} = useSelector((state) => state[NameSpace.FILMS_DATA]);
+
   return (
     <div className="user-page">
       <Header className={`user-page__head`}>
@@ -33,10 +37,6 @@ const MyList = ({films}) => {
       </footer>
     </div>
   );
-};
-
-MyList.propTypes = {
-  films: propTypes.arrayOf(propTypes.object).isRequired
 };
 
 export default MyList;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Videoplayer Should MyList render correctly 1`] = `
+<div>
+  <video
+    poster="img/the-grand-budapest-hotel-poster.jpg"
+    src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4 "
+    style="width: 280px; height: 175px; object-fit: cover;"
+  />
+</div>
+`;

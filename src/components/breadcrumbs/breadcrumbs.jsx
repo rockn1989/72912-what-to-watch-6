@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import propTypes from "prop-types";
+import propTypes from 'prop-types';
 
 const BreadCrumbs = ({id, name}) => {
   return (
