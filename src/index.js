@@ -12,7 +12,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from './api';
 import {authorizationAction} from './store/action';
 import {loadFilmsList, checkAuth} from './store/api-actions';
-import {redirect} from './store/redirect';
+import {redirect} from './store/middlewares/redirect';
 
 const onUnauthorized = () => {
   store.dispatch(authorizationAction(false));

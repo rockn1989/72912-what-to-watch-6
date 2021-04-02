@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import propTypes from 'prop-types';
 import FormRatingLabel from '../form-rating-label/form-rating-label';
 
@@ -27,19 +27,19 @@ const AddReviewForm = ({onSendUserCommentHandler, id, formStatus, error}) => {
     onSendUserCommentHandler(CommentPost);
   };
 
-  const onChangeHandler = (evt) => {
+  const onChangeHandler = useCallback(({target}) => {
     setFormData({
       ...formData,
-      message: evt.target.value,
+      message: target.value,
     });
-  };
+  });
 
-  const onCheckRatingHandler = (evt) => {
+  const onCheckRatingHandler = useCallback(({target}) => {
     setFormData({
       ...formData,
-      rating: parseInt(evt.target.value, 10),
+      rating: parseInt(target.value, 10),
     });
-  };
+  });
 
   useEffect(() => {
     if (formData.rating !== 0 && (formData.message.length >= 50 && formData.message.length <= 400)) {

@@ -1,8 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import {adapterFilmData} from '../../service/adapters';
 
 const Overview = ({film}) => {
-  const {rating, scores_count: scoresCount, description, director, starring} = film;
+  const {rating, scoresCount, description, director, starring} = adapterFilmData(film);
   return (
     <>
       <div className="movie-rating">
