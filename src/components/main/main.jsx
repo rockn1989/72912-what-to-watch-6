@@ -3,12 +3,14 @@ import CardList from '../card-list/card-list';
 import propTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import Header from '../header/header';
+import Footer from '../footer/footer';
 import GenresList from '../genres-list/genres-list';
 import ShowMore from '../show-more/show-more';
 import {MAX_FILMS} from '../../const';
 
 import {adapterFilmData} from '../../service/adapters';
 import Preloader from '../preloader/preloader';
+import {AppRoute} from '../../const';
 
 const Welcome = ({
   genre,
@@ -69,6 +71,9 @@ const Welcome = ({
                 <button
                   className="btn btn--play movie-card__button"
                   type="button"
+                  onClick={() => {
+                    history.push(`/player/${promo.id}`);
+                  }}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -79,7 +84,7 @@ const Welcome = ({
                   className="btn btn--list movie-card__button"
                   type="button"
                   onClick={() => {
-                    history.push(`/mylist`);
+                    history.push(AppRoute.MY_LIST);
                   }}
                 >
                   <svg viewBox="0 0 19 20" width="19" height="20">
@@ -108,19 +113,7 @@ const Welcome = ({
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </React.Fragment>
   );

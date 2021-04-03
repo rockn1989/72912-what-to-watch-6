@@ -22,6 +22,8 @@ import {getFilm} from '../../store/film-data/selectors';
 import {getFormStatus} from '../../store/form-status/selectors';
 import {getErrorStatus} from '../../store/error-status/selectors';
 
+import {AppRoute} from '../../const';
+
 const App = ({
   film,
   onLoadingFilm,
@@ -41,7 +43,7 @@ const App = ({
 
   return (
     <Switch>
-      <Route path="/" exact render={() => {
+      <Route path={AppRoute.MAIN} exact render={() => {
         return <Welcome
           filtredFilms={filtredFilms}
           genre={genre}
@@ -55,15 +57,15 @@ const App = ({
       }}>
       </Route>
 
-      <Route path="/login" exact render={() => <SignIn />} />
+      <Route path={AppRoute.LOGIN} exact render={() => <SignIn />} />
 
-      <Route path="/mylist" exact render={() => <MyList />} />
+      <Route path={AppRoute.MY_LIST} exact render={() => <MyList />} />
 
-      <Route path="/films/:id" exact render={() => {
+      <Route path={AppRoute.FILM} exact render={() => {
         return <Film onLoadingFilm={onLoadingFilm} />;
       }} />
 
-      <PrivateRoute path="/films/:id/review" exact component={() => {
+      <PrivateRoute path={AppRoute.REVIEW} exact component={() => {
         return <AddReview onSendUserComment={onSendUserComment}
           error={error}
           film={film}
@@ -72,7 +74,7 @@ const App = ({
       }
       }/>
 
-      <Route path="/player/:id" exact render={({match}) => {
+      <Route path={AppRoute.PLAYER} exact render={({match}) => {
         const id = match.params.id;
         return <Player onLoadingFilm={onLoadingFilm} film={film} id={id} />;
       }} />

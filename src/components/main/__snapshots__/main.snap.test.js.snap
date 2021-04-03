@@ -1,12 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should MyList render correctly 1`] = `
+exports[`Main render is correctly 1`] = `
 <div>
-  <div
-    class="user-page"
+  <section
+    class="movie-card"
   >
+    <div
+      class="movie-card__bg"
+    >
+      <img />
+    </div>
+    <h1
+      class="visually-hidden"
+    >
+      WTW
+    </h1>
     <header
-      class="page-header user-page__head"
+      class="page-header undefined"
     >
       <div
         class="logo"
@@ -32,11 +42,6 @@ exports[`Should MyList render correctly 1`] = `
           </span>
         </a>
       </div>
-      <h1
-        class="page-title user-page__title"
-      >
-        My list
-      </h1>
       <div
         class="user-block"
       >
@@ -48,6 +53,81 @@ exports[`Should MyList render correctly 1`] = `
         </a>
       </div>
     </header>
+    <div
+      class="movie-card__wrap"
+    >
+      <div
+        class="movie-card__info"
+      >
+        <div
+          class="movie-card__poster"
+        >
+          <img
+            height="327"
+            width="218"
+          />
+        </div>
+        <div
+          class="movie-card__desc"
+        >
+          <h2
+            class="movie-card__title"
+          />
+          <p
+            class="movie-card__meta"
+          >
+            <span
+              class="movie-card__genre"
+            />
+            <span
+              class="movie-card__year"
+            />
+          </p>
+          <div
+            class="movie-card__buttons"
+          >
+            <button
+              class="btn btn--play movie-card__button"
+              type="button"
+            >
+              <svg
+                height="19"
+                viewBox="0 0 19 19"
+                width="19"
+              >
+                <use
+                  xlink:href="#play-s"
+                />
+              </svg>
+              <span>
+                Play
+              </span>
+            </button>
+            <button
+              class="btn btn--list movie-card__button"
+              type="button"
+            >
+              <svg
+                height="20"
+                viewBox="0 0 19 20"
+                width="19"
+              >
+                <use
+                  xlink:href="#add"
+                />
+              </svg>
+              <span>
+                My list
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div
+    class="page-content"
+  >
     <section
       class="catalog"
     >
@@ -56,6 +136,30 @@ exports[`Should MyList render correctly 1`] = `
       >
         Catalog
       </h2>
+      <ul
+        class="catalog__genres-list"
+      >
+        <li
+          class="catalog__genres-item catalog__genres-item--active"
+        >
+          <a
+            class="catalog__genres-link"
+            href="#"
+          >
+            All genres
+          </a>
+        </li>
+        <li
+          class="catalog__genres-item "
+        >
+          <a
+            class="catalog__genres-link"
+            href="#"
+          >
+            Comedy
+          </a>
+        </li>
+      </ul>
       <div
         class="catalog__movies-list"
       >
@@ -324,6 +428,9 @@ exports[`Should MyList render correctly 1`] = `
           </h3>
         </article>
       </div>
+      <div
+        class="catalog__more"
+      />
     </section>
     <footer
       class="page-footer"

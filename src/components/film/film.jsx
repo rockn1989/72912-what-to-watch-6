@@ -4,6 +4,7 @@ import {NameSpace} from '../../store/root-reducer';
 import {useSelector} from 'react-redux';
 import propTypes from 'prop-types';
 import Header from '../header/header';
+import Footer from '../footer/footer';
 import CardList from '../card-list/card-list';
 import Tabs from '../tabs/tabs';
 import Overview from '../overview/overview';
@@ -12,6 +13,7 @@ import Reviews from '../reviews/reviews';
 import reviews from '../../mocks/reviews';
 import {adapterFilmData} from '../../service/adapters';
 import Preloader from '../preloader/preloader';
+import {AppRoute} from '../../const';
 
 const tabsTitle = [`Overview`, `Details`, `Reviews`];
 
@@ -73,7 +75,7 @@ const Film = ({onLoadingFilm}) => {
                   className="btn btn--list movie-card__button"
                   type="button"
                   onClick={() => {
-                    history.push(`/mylist`);
+                    history.push(AppRoute.MY_LIST);
                   }}
                 >
                   <svg viewBox="0 0 19 20" width="19" height="20">
@@ -117,20 +119,7 @@ const Film = ({onLoadingFilm}) => {
             <CardList filmsList={similarMovies} />
           </div>
         </section>
-
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </React.Fragment>
   );
