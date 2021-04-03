@@ -11,9 +11,10 @@ import Overview from '../overview/overview';
 import Details from '../details/details';
 import Reviews from '../reviews/reviews';
 import reviews from '../../mocks/reviews';
+import AddToFavorite from '../add-to-favorite/add-to-favorite';
 import {adapterFilmData} from '../../service/adapters';
 import Preloader from '../preloader/preloader';
-import {AppRoute} from '../../const';
+
 
 const tabsTitle = [`Overview`, `Details`, `Reviews`];
 
@@ -71,18 +72,7 @@ const Film = ({onLoadingFilm}) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button
-                  className="btn btn--list movie-card__button"
-                  type="button"
-                  onClick={() => {
-                    history.push(AppRoute.MY_LIST);
-                  }}
-                >
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <AddToFavorite id={parseInt(id, 10)} />
                 {auth && <Link to={{pathname: `/films/${id}/review`}} className="btn movie-card__button">Add review</Link>}
               </div>
             </div>

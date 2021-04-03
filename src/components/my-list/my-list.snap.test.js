@@ -22,6 +22,7 @@ const store = mockStore({
     genre: `All genres`,
     filmsCounter: [],
     films,
+    favorites: []
   },
   [NameSpace.FILM_DATA]: {
     film: films[0]
@@ -41,7 +42,7 @@ it(`Should MyList render correctly`, () => {
   const {container} = render(
       <redux.Provider store={store}>
         <Router history={history}>
-          <MyList />
+          <MyList onGetFavoriteFilms={jest.fn()} />
         </Router>
       </redux.Provider>
   );

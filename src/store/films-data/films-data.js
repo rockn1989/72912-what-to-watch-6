@@ -3,7 +3,8 @@ import {ActionType} from '../action';
 const initialState = {
   genre: `All genres`,
   films: [],
-  filmsCounter: []
+  filmsCounter: [],
+  favorites: []
 };
 
 const filmsData = (state = initialState, action) => {
@@ -47,6 +48,12 @@ const filmsData = (state = initialState, action) => {
       return {
         ...state,
         filmsCounter: [...newFilmsCounter]
+      };
+
+    case ActionType.GET_FAVORITES:
+      return {
+        ...state,
+        favorites: action.payload
       };
   }
 

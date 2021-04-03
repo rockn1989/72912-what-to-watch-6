@@ -3,6 +3,7 @@ import {NameSpace} from '../root-reducer';
 import {MAX_FILMS} from '../../const';
 
 export const getFilms = (state) => state[NameSpace.FILMS_DATA].films;
+export const getFavoritesFilms = (state) => state[NameSpace.FILMS_DATA].favorites;
 export const getFilm = (state) => state[NameSpace.FILMS_DATA].film;
 export const getFilmsCounter = (state) => state[NameSpace.FILMS_DATA].filmsCounter;
 export const getFilmGenre = (state) => state[NameSpace.FILMS_DATA].genre;

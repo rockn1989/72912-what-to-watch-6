@@ -7,7 +7,7 @@ exports[`Should MyList render correctly 1`] = `
   >
     <video
       class="player__video"
-      poster="img/the-grand-budapest-hotel-poster.jpg"
+      poster="img/bg-the-grand-budapest-hotel.jpg"
       src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4 "
     />
     <button
@@ -28,11 +28,11 @@ exports[`Should MyList render correctly 1`] = `
           <progress
             class="player__progress"
             max="100"
-            value="30"
+            value="0"
           />
           <div
             class="player__toggler"
-            style="left: 30%;"
+            style="left: 0%;"
           >
             Toggler
           </div>
@@ -40,7 +40,7 @@ exports[`Should MyList render correctly 1`] = `
         <div
           class="player__time-value"
         >
-          1:30:29
+          00:00:00
         </div>
       </div>
       <div
@@ -66,7 +66,7 @@ exports[`Should MyList render correctly 1`] = `
         <div
           class="player__name"
         >
-          Transpotting
+          The Grand Budapest Hotel
         </div>
         <button
           class="player__full-screen"

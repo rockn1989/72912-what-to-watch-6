@@ -11,7 +11,7 @@ import rootReducer from './store/root-reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from './api';
 import {authorizationAction} from './store/action';
-import {loadFilmsList, checkAuth} from './store/api-actions';
+import {loadFilmsList, checkAuth, getFavoriteFilms} from './store/api-actions';
 import {redirect} from './store/middlewares/redirect';
 
 const onUnauthorized = () => {
@@ -29,6 +29,7 @@ const store = createStore(rootReducer,
 
 store.dispatch(loadFilmsList());
 store.dispatch(checkAuth());
+store.dispatch(getFavoriteFilms());
 
 ReactDOM.render(
     <Provider store={store}>

@@ -15,7 +15,7 @@ import PrivateRoute from '../private-route/private-route';
 import {connect} from 'react-redux';
 
 import {setGenreAction, showMoreAction, setFilmsCounterAction} from '../../store/action';
-import {loadFilm, sendComment} from '../../store/api-actions';
+import {loadFilm, getFavoriteFilms, sendComment} from '../../store/api-actions';
 
 import {getFilmGenre, getGenresList, getFiltredFilmsByCounter, getPromoFilm, getCurrentCounter} from '../../store/films-data/selectors';
 import {getFilm} from '../../store/film-data/selectors';
@@ -27,6 +27,7 @@ import {AppRoute} from '../../const';
 const App = ({
   film,
   onLoadingFilm,
+  onGetFavoriteFilms,
   onSendUserComment,
   formStatus,
   error,
@@ -59,8 +60,6 @@ const App = ({
 
       <Route path={AppRoute.LOGIN} exact render={() => <SignIn />} />
 
-      <Route path={AppRoute.MY_LIST} exact render={() => <MyList />} />
-
       <Route path={AppRoute.FILM} exact render={() => {
         return <Film onLoadingFilm={onLoadingFilm} />;
       }} />
@@ -74,9 +73,13 @@ const App = ({
       }
       }/>
 
-      <Route path={AppRoute.PLAYER} exact render={({match}) => {
-        const id = match.params.id;
-        return <Player onLoadingFilm={onLoadingFilm} film={film} id={id} />;
+      <PrivateRoute path={AppRoute.MY_LIST} exact component={() => {
+        return <MyList onGetFavoriteFilms={onGetFavoriteFilms}/>;
+      }
+      }/>
+
+      <Route path={AppRoute.PLAYER} exact render={() => {
+        return <Player onLoadingFilm={onLoadingFilm} />;
       }} />
 
       <Route path="*" render={() => <PageNotFound />} />
@@ -88,6 +91,7 @@ const App = ({
 App.propTypes = {
   film: propTypes.object.isRequired,
   onLoadingFilm: propTypes.func.isRequired,
+  onGetFavoriteFilms: propTypes.func.isRequired,
   onSendUserComment: propTypes.func.isRequired,
   formStatus: propTypes.bool.isRequired,
   error: propTypes.bool.isRequired,
@@ -119,6 +123,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   onLoadingFilm(payload) {
     dispatch(loadFilm(payload));
+  },
+  onGetFavoriteFilms(payload) {
+    dispatch(getFavoriteFilms(payload));
   },
   onSendUserComment(payload) {
     dispatch(sendComment(payload));

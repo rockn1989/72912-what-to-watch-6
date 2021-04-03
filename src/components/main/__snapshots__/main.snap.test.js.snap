@@ -8,7 +8,10 @@ exports[`Main render is correctly 1`] = `
     <div
       class="movie-card__bg"
     >
-      <img />
+      <img
+        alt="The Grand Budapest Hotel"
+        src="img/bg-the-grand-budapest-hotel.jpg"
+      />
     </div>
     <h1
       class="visually-hidden"
@@ -63,7 +66,9 @@ exports[`Main render is correctly 1`] = `
           class="movie-card__poster"
         >
           <img
+            alt="The Grand Budapest Hotel"
             height="327"
+            src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
           />
         </div>
@@ -72,13 +77,17 @@ exports[`Main render is correctly 1`] = `
         >
           <h2
             class="movie-card__title"
-          />
+          >
+            The Grand Budapest Hotel
+          </h2>
           <p
             class="movie-card__meta"
           >
             <span
               class="movie-card__genre"
-            />
+            >
+              Comedy
+            </span>
             <span
               class="movie-card__year"
             />

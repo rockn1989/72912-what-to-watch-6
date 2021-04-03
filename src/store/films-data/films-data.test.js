@@ -18,7 +18,8 @@ describe(`Reducer work correctly`, () => {
     expect(filmsData(undefined, {})).toEqual({
       genre: `All genres`,
       films: [],
-      filmsCounter: []
+      filmsCounter: [],
+      favorites: []
     });
   });
 
@@ -26,13 +27,15 @@ describe(`Reducer work correctly`, () => {
     const state = {
       genre: `All genre`,
       films: [],
-      filmsCounter: []
+      filmsCounter: [],
+      favorites: []
     };
 
     expect(filmsData(state, setGenreAction(`Comedy`))).toEqual({
       genre: `Comedy`,
       films: [],
-      filmsCounter: []
+      filmsCounter: [],
+      favorites: []
     });
   });
 
@@ -40,7 +43,8 @@ describe(`Reducer work correctly`, () => {
     const state = {
       genre: `All genre`,
       films: [],
-      filmsCounter: []
+      filmsCounter: [],
+      favorites: []
     };
 
     const films = [
@@ -57,7 +61,8 @@ describe(`Reducer work correctly`, () => {
     expect(filmsData(state, loadFilmsAction(films))).toEqual({
       genre: `All genre`,
       films,
-      filmsCounter: []
+      filmsCounter: [],
+      favorites: []
     });
 
     const noFilmsLoaded = [];
@@ -65,7 +70,8 @@ describe(`Reducer work correctly`, () => {
     expect(filmsData(state, loadFilmsAction(noFilmsLoaded))).toEqual({
       genre: `All genre`,
       films: [],
-      filmsCounter: []
+      filmsCounter: [],
+      favorites: []
     });
 
   });
@@ -74,7 +80,8 @@ describe(`Reducer work correctly`, () => {
     const state = {
       genre: `All genres`,
       films: [],
-      filmsCounter: []
+      filmsCounter: [],
+      favorites: []
     };
 
     const counter = new Set([`All genres`, `Drama`]);
@@ -82,6 +89,7 @@ describe(`Reducer work correctly`, () => {
     expect(filmsData(state, setFilmsCounterAction(counter))).toEqual({
       genre: `All genres`,
       films: [],
+      favorites: [],
       filmsCounter: [
         {
           name: `All genres`,
@@ -99,6 +107,7 @@ describe(`Reducer work correctly`, () => {
     const state = {
       genre: `All genres`,
       films: [],
+      favorites: [],
       filmsCounter: [
         {
           name: `All genres`,
@@ -114,6 +123,7 @@ describe(`Reducer work correctly`, () => {
     expect(filmsData(state, showMoreAction())).toEqual({
       genre: `All genres`,
       films: [],
+      favorites: [],
       filmsCounter: [
         {
           name: `All genres`,

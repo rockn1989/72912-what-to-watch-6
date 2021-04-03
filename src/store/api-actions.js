@@ -1,4 +1,14 @@
-import {loadFilmsAction, loadFilmAction, redirectAction, authorizationAction, setUserInfoAction, sendFormDataAction, showErrorAction} from "./action";
+import {
+  loadFilmsAction,
+  loadFilmAction,
+  getFavoriteAction,
+  setFavoriteAction,
+  redirectAction,
+  authorizationAction,
+  setUserInfoAction,
+  sendFormDataAction,
+  showErrorAction
+} from "./action";
 
 export const loadFilmsList = () => (dispatch, _getState, api) => (
   api.get(`/films`)
@@ -14,6 +24,20 @@ export const loadFilm = (id) => (dispatch, _getState, api) => (
     })
     .catch(() => {
       dispatch(redirectAction(`/page-not-found`));
+    })
+);
+
+export const getFavoriteFilms = () => (dispatch, _getState, api) => (
+  api.get(`/favorite`)
+    .then(({data}) => {
+      dispatch(getFavoriteAction(data));
+    })
+);
+
+export const setFavoriteFilm = (id, status) => (dispatch, _getState, api) => (
+  api.post(`/favorite/${id}/${status}`)
+    .then(({data}) => {
+      dispatch(setFavoriteAction(data));
     })
 );
 

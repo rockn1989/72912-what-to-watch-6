@@ -5,12 +5,12 @@ import {useHistory} from 'react-router-dom';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import GenresList from '../genres-list/genres-list';
+import AddToFavorite from '../add-to-favorite/add-to-favorite';
 import ShowMore from '../show-more/show-more';
 import {MAX_FILMS} from '../../const';
 
 import {adapterFilmData} from '../../service/adapters';
 import Preloader from '../preloader/preloader';
-import {AppRoute} from '../../const';
 
 const Welcome = ({
   genre,
@@ -80,18 +80,7 @@ const Welcome = ({
                   </svg>
                   <span>Play</span>
                 </button>
-                <button
-                  className="btn btn--list movie-card__button"
-                  type="button"
-                  onClick={() => {
-                    history.push(AppRoute.MY_LIST);
-                  }}
-                >
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <AddToFavorite id={promo.id} />
               </div>
             </div>
           </div>

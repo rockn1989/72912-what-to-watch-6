@@ -21,6 +21,7 @@ const store = mockStore({
     genre: `All genres`,
     filmsCounter: [],
     films,
+    favorites: []
   },
   [NameSpace.FILM_DATA]: {
     film: films[0]
@@ -45,7 +46,7 @@ describe(`Test routing`, () => {
     render(
         <redux.Provider store={store}>
           <Router history={history}>
-            <App/>
+            <App promo={films[0]}/>
           </Router>
         </redux.Provider>
     );

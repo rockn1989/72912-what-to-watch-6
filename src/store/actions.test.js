@@ -3,6 +3,7 @@ import {
   setGenreAction,
   loadFilmsAction,
   loadFilmAction,
+  getFavoriteAction,
   showMoreAction,
   setFilmsCounterAction,
   authorizationAction,
@@ -50,6 +51,35 @@ describe(`Action creators work correctly`, () => {
     ];
 
     expect(loadFilmsAction(films)).toEqual(expectedAction);
+  });
+
+  it(`Action creator for load favorites films returs correct action`, () => {
+    const expectedAction = {
+      type: ActionType.GET_FAVORITES,
+      payload: [
+        {
+          name: `test-1`,
+          genre: `Drama`
+        },
+        {
+          name: `test-2`,
+          genre: `Comedy`
+        }
+      ]
+    };
+
+    const films = [
+      {
+        name: `test-1`,
+        genre: `Drama`
+      },
+      {
+        name: `test-2`,
+        genre: `Comedy`
+      }
+    ];
+
+    expect(getFavoriteAction(films)).toEqual(expectedAction);
   });
 
   it(`Action creator for load one film returs correct action`, () => {

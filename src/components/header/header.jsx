@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import propTypes from 'prop-types';
 import {useSelector} from 'react-redux';
 import {NameSpace} from '../../store/root-reducer';
+import {AppRoute} from '../../const';
 
 const Header = (props) => {
   const {className} = props;
@@ -23,14 +24,16 @@ const Header = (props) => {
       <div className="user-block">
         {auth ?
           <div className="user-block__avatar">
-            <img
-              src={avatar}
-              alt="User avatar"
-              width="63"
-              height="63"
-            />
+            <Link to={AppRoute.MY_LIST}>
+              <img
+                src={avatar}
+                alt="User avatar"
+                width="63"
+                height="63"
+              />
+            </Link>
           </div> :
-          <Link to="/login" className="user-block__link">Sign in</Link>
+          <Link to={AppRoute.LOGIN} className="user-block__link">Sign in</Link>
         }
       </div>
     </header>

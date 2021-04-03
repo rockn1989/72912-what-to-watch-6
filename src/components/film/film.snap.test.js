@@ -21,6 +21,7 @@ const store = mockStore({
     genre: `All genres`,
     filmsCounter: [],
     films,
+    favorites: []
   },
   [NameSpace.FILM_DATA]: {
     film: films[0]

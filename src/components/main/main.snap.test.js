@@ -14,6 +14,9 @@ const mockStore = configureStore({});
 it(`Main render is correctly`, () => {
   const history = createMemoryHistory();
   const store = mockStore({
+    [NameSpace.FILMS_DATA]: {
+      favorites: []
+    },
     [NameSpace.USER]: {
       authorizationStatus: NO_AUTH,
       userInfo: {
@@ -32,7 +35,7 @@ it(`Main render is correctly`, () => {
             showMore={jest.fn()}
             setFilmsCounter={jest.fn()}
             setGenre={jest.fn()}
-            promo={{}}
+            promo={films[0]}
             currentCounter={{}}
             genresList={mockGeresList}
             genre={`All genres`}

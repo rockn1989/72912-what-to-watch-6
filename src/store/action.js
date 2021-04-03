@@ -4,6 +4,8 @@ export const ActionType = {
   SET_FILMS_COUNTER: `films/set_films_counter`,
   LOAD_FILMS: `films/load_films`,
   LOAD_FILM: `films/id/load_film`,
+  SET_FAVORITE: `films/set_favorite`,
+  GET_FAVORITES: `films/get_favorites`,
   AUTHORIZED: `user/authorized`,
   SET_USER_INFO: `user/set_user_info`,
   SEND_COMMENT: `user/send_comment`,
@@ -25,6 +27,16 @@ export const loadFilmsAction = (films) => ({
 export const loadFilmAction = (film) => ({
   type: ActionType.LOAD_FILM,
   payload: film
+});
+
+export const setFavoriteAction = (film) => ({
+  type: ActionType.SET_FAVORITE,
+  payload: film
+});
+
+export const getFavoriteAction = (films) => ({
+  type: ActionType.GET_FAVORITES,
+  payload: films
 });
 
 export const showMoreAction = () => ({
