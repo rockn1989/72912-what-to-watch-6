@@ -34,7 +34,7 @@ const Film = ({onLoadingFilm}) => {
   }
 
   const {name, genre, realeased, posterImage, backgroundImage, backgroundColor} = adapterFilmData(film);
-  const similarMovies = films.filter((filmInfo) => filmInfo.genre === genre);
+  const similarMovies = films.filter((filmInfo) => filmInfo.genre === genre).filter((filmInfo) => filmInfo.name !== film.name);
 
   return (
     <React.Fragment>

@@ -25,7 +25,7 @@ describe(`Private router`, () => {
     render(
         <Provider store={store}>
           <Router history={history}>
-            <Route exact path="/"><h1>Public Route</h1></Route>
+            <Route exact path="/login"><h1>Public Route</h1></Route>
             <PrivateRoute
               exact
               path="/private"
@@ -47,7 +47,7 @@ describe(`Private router`, () => {
     render(
         <Provider store={store}>
           <Router history={history}>
-            <Route exact path="/"><h1>Public Route</h1></Route>
+            <Route exact path="/login"><h1>Public Route</h1></Route>
             <PrivateRoute
               exact
               path="/private"

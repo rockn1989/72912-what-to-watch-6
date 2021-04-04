@@ -16,7 +16,7 @@ const AddReviewForm = ({onSendUserCommentHandler, id, formStatus, error}) => {
     isActive: false,
   });
 
-  const onFormSubmit = (evt) => {
+  const handleFormSubmit = (evt) => {
     evt.preventDefault();
     const CommentPost = {
       id,
@@ -27,14 +27,14 @@ const AddReviewForm = ({onSendUserCommentHandler, id, formStatus, error}) => {
     onSendUserCommentHandler(CommentPost);
   };
 
-  const onChangeHandler = useCallback(({target}) => {
+  const handleTextAreaChange = useCallback(({target}) => {
     setFormData({
       ...formData,
       message: target.value,
     });
   });
 
-  const onCheckRatingHandler = useCallback(({target}) => {
+  const handleInputCheck = useCallback(({target}) => {
     setFormData({
       ...formData,
       rating: parseInt(target.value, 10),
@@ -58,13 +58,13 @@ const AddReviewForm = ({onSendUserCommentHandler, id, formStatus, error}) => {
 
   const fields = new Array(10).fill(``).map((el, idx) => {
     return (
-      <FormRatingLabel key={`form-rating-label-${idx}`} idx={idx} onCheckRatingHandler={onCheckRatingHandler} formStatus={formStatus} />
+      <FormRatingLabel key={`form-rating-label-${idx}`} idx={idx} handleInputCheck={handleInputCheck} formStatus={formStatus} />
     );
   });
 
   return (
     <div className="add-review">
-      <form action="#" className="add-review__form" onSubmit={onFormSubmit} >
+      <form action="#" className="add-review__form" onSubmit={handleFormSubmit} >
         <div className="rating">
           <div className="rating__stars">
             {fields}
@@ -72,7 +72,7 @@ const AddReviewForm = ({onSendUserCommentHandler, id, formStatus, error}) => {
         </div>
 
         <div className="add-review__text">
-          <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange={onChangeHandler} disabled={formStatus ? false : true}></textarea>
+          <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange={handleTextAreaChange} disabled={formStatus ? false : true}></textarea>
           <div className="add-review__submit">
             <button className="add-review__btn" type="submit" disabled={formData.isActive ? false : true}>Post</button>
           </div>

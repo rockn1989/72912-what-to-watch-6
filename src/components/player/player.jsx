@@ -22,7 +22,7 @@ const Player = ({onLoadingFilm}) => {
     onLoadingFilm(id);
   }, [id]);
 
-  const onTogglePlayHandler = () => {
+  const handleTogglePlayPause = () => {
     setIsPlay(!isPlay);
 
     if (isPlay) {
@@ -32,18 +32,18 @@ const Player = ({onLoadingFilm}) => {
     }
   };
 
-  const onToggleFullScreenModeHandler = () => {
+  const handleScreenModeToggle = () => {
     videoRef.current.requestFullscreen();
   };
 
-  const onCheckTimeHandler = () => {
+  const handleVideoTimerUpdate = () => {
     setDuration(videoRef.current.duration);
     setCurrentTime(videoRef.current.currentTime);
 
     setProgress(parseInt((videoRef.current.currentTime / videoRef.current.duration) * 100, 10).toFixed(2));
   };
 
-  const onExitHandler = () => {
+  const handleVideoExit = () => {
     videoRef.current.currentTime = 0;
     videoRef.current.pause();
 
@@ -68,10 +68,10 @@ const Player = ({onLoadingFilm}) => {
         className="player__video"
         poster={backgroundImage}
         ref={videoRef}
-        onTimeUpdate={onCheckTimeHandler}
+        onTimeUpdate={handleVideoTimerUpdate}
       ></video>
 
-      <button type="button" className="player__exit" onClick={onExitHandler}>
+      <button type="button" className="player__exit" onClick={handleVideoExit}>
         Exit
       </button>
 
@@ -91,7 +91,7 @@ const Player = ({onLoadingFilm}) => {
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play" onClick={onTogglePlayHandler}>
+          <button type="button" className="player__play" onClick={handleTogglePlayPause}>
             <svg viewBox="0 0 19 19" width="19" height="19">
               <use xlinkHref={isPlay ? `#pause` : `#play-s`}></use>
             </svg>
@@ -99,7 +99,7 @@ const Player = ({onLoadingFilm}) => {
           </button>
           <div className="player__name">{name}</div>
 
-          <button type="button" className="player__full-screen" onClick={onToggleFullScreenModeHandler}>
+          <button type="button" className="player__full-screen" onClick={handleScreenModeToggle}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>

@@ -52,7 +52,7 @@ exports[`Should Details render correctly 1`] = `
         <span
           class="movie-card__details-value"
         >
-          m
+          NaNh NaNm
         </span>
       </p>
       <p

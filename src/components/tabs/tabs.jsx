@@ -2,14 +2,14 @@ import React from 'react';
 import withTabs from '../../hocs/with-tabs';
 import propTypes from 'prop-types';
 
-const Tabs = ({tabsTitle, activeTab, onChangeActiveItem, ...props}) => {
+const Tabs = ({tabsTitle, activeTab, handlerTabOnClick, ...props}) => {
 
   const tabs = tabsTitle.map((tab, idx) => {
     const isActive = idx === activeTab ? `movie-nav__item--active` : ``;
     return (
       <li key={`${tab}_${idx}`} className={`movie-nav__item ${isActive}`} onClick={(evt) => {
         evt.preventDefault();
-        onChangeActiveItem(idx);
+        handlerTabOnClick(idx);
       }}>
         <a href="#" className="movie-nav__link">{tab}</a>
       </li>);
@@ -35,7 +35,7 @@ const Tabs = ({tabsTitle, activeTab, onChangeActiveItem, ...props}) => {
 Tabs.propTypes = {
   tabsTitle: propTypes.array.isRequired,
   activeTab: propTypes.number.isRequired,
-  onChangeActiveItem: propTypes.func.isRequired,
+  handlerTabOnClick: propTypes.func.isRequired,
   children: propTypes.any
 };
 

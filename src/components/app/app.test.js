@@ -81,7 +81,7 @@ describe(`Test routing`, () => {
         </redux.Provider>
     );
 
-    expect(screen.getByText(/My list/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Sign in/i).length).toBe(2);
   });
 
   it(`Render detail film when user navigate to '/films/:id' url`, () => {
@@ -97,25 +97,48 @@ describe(`Test routing`, () => {
         </redux.Provider>
     );
 
-    expect(screen.getByText(/WTW/i)).toBeInTheDocument();
+    expect(screen.getByText(/Play/i)).toBeInTheDocument();
     expect(screen.getByText(/More like this/i)).toBeInTheDocument();
   });
 
   it(`Render detail film review when user navigate to '/films/:id/review' url`, () => {
+    const data = mockStore({
+      [NameSpace.USER]: {
+        authorizationStatus: true,
+        userInfo: {
+          avatarUrl: `img/avatar.jpg`
+        }
+      },
+      [NameSpace.FILMS_DATA]: {
+        genre: `All genres`,
+        filmsCounter: [],
+        films,
+        favorites: []
+      },
+      [NameSpace.FILM_DATA]: {
+        film: films[0]
+      },
+      [NameSpace.FORM_STATUS]: {
+        formStatus: true
+      },
+      [NameSpace.ERROR_STATUS]: {
+        error: false
+      }
+    });
     const history = createMemoryHistory();
     const id = 1;
     store.dispatch = () => {};
     history.push(`/films/${id}/review`);
     render(
-        <redux.Provider store={store}>
+        <redux.Provider store={data}>
           <Router history={history}>
             <App/>
           </Router>
         </redux.Provider>
     );
 
-    expect(screen.getByText(/What to watch Ltd/i)).toBeInTheDocument();
-    expect(screen.getByText(/WTW/i)).toBeInTheDocument();
+    expect(screen.getByText(/Post/i)).toBeInTheDocument();
+    expect(screen.getByText(/Add Review/i)).toBeInTheDocument();
   });
 
   it(`Render Player when user navigate to '/player/:id' url`, () => {

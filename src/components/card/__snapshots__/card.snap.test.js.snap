@@ -6,25 +6,25 @@ exports[`Card Should render card correctly 1`] = `
     class="small-movie-card catalog__movies-card"
     id="1"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/1"
     >
-      <img
-        height="175"
-        src="img/the-grand-budapest-hotel-poster.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/1"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/the-grand-budapest-hotel-poster.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         The Grand Budapest Hotel
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
 </div>
 `;
@@ -35,25 +35,25 @@ exports[`Card Should render card correctly if card is active 1`] = `
     class="small-movie-card catalog__movies-card"
     id="1"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/1"
     >
-      <video
-        poster="img/the-grand-budapest-hotel-poster.jpg"
-        src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4 "
-        style="width: 280px; height: 175px; object-fit: cover;"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/1"
+      <div
+        class="small-movie-card__image"
+      >
+        <video
+          poster="img/the-grand-budapest-hotel-poster.jpg"
+          src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4 "
+          style="width: 280px; height: 175px; object-fit: cover;"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         The Grand Budapest Hotel
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
 </div>
 `;

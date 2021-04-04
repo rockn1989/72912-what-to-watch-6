@@ -6,3 +6,11 @@ export const adaptersTimer = (time) => {
 
   return `${hours < 10 ? `0` + hours : hours}:${minutes < 10 ? `0` + minutes : minutes}:${seconds < 10 ? `0` + seconds : seconds}`;
 };
+
+export const convertTimer = (time) => {
+  const hours = Math.floor(time / 60);
+  const minutes = Math.floor(time - (60 * hours));
+  return {
+    hours, minutes
+  };
+};

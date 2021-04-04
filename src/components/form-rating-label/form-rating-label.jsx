@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const FormRatingLabel = ({idx, onCheckRatingHandler, formStatus}) => {
+const FormRatingLabel = ({idx, handleInputCheck, formStatus}) => {
   return (
     <React.Fragment>
       <input
@@ -10,7 +10,7 @@ const FormRatingLabel = ({idx, onCheckRatingHandler, formStatus}) => {
         type="radio"
         name="rating"
         value={idx + 1}
-        onChange={onCheckRatingHandler}
+        onChange={handleInputCheck}
         disabled={!formStatus}
       />
       <label className="rating__label" htmlFor={`star-${idx + 1}`}>Rating {idx + 1}</label>
@@ -21,7 +21,7 @@ const FormRatingLabel = ({idx, onCheckRatingHandler, formStatus}) => {
 
 FormRatingLabel.propTypes = {
   idx: propTypes.number.isRequired,
-  onCheckRatingHandler: propTypes.func.isRequired,
+  handleInputCheck: propTypes.func.isRequired,
   formStatus: propTypes.bool.isRequired,
 };
 

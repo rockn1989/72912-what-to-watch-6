@@ -6,265 +6,265 @@ exports[`Should MyList render correctly 1`] = `
     class="small-movie-card catalog__movies-card"
     id="1"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/1"
     >
-      <img
-        height="175"
-        src="img/the-grand-budapest-hotel-poster.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/1"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/the-grand-budapest-hotel-poster.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         The Grand Budapest Hotel
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
   <article
     class="small-movie-card catalog__movies-card"
     id="2"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/2"
     >
-      <img
-        height="175"
-        src="img/aviator.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/2"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/aviator.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         Aviator
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
   <article
     class="small-movie-card catalog__movies-card"
     id="3"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/3"
     >
-      <img
-        height="175"
-        src="img/revenant.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/3"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/revenant.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         Revenant
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
   <article
     class="small-movie-card catalog__movies-card"
     id="4"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/4"
     >
-      <img
-        height="175"
-        src="img/johnny-english.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/4"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/johnny-english.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         Johnny English
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
   <article
     class="small-movie-card catalog__movies-card"
     id="5"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/5"
     >
-      <img
-        height="175"
-        src="img/what-we-do-in-the-shadows.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/5"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/what-we-do-in-the-shadows.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         What we do is the shadow
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
   <article
     class="small-movie-card catalog__movies-card"
     id="6"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/6"
     >
-      <img
-        height="175"
-        src="img/we-need-to-talk-about-kevin.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/6"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/we-need-to-talk-about-kevin.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         We need to talk about Kevin
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
   <article
     class="small-movie-card catalog__movies-card"
     id="7"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/7"
     >
-      <img
-        height="175"
-        src="img/macbeth.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/7"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/macbeth.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         Macbeth
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
   <article
     class="small-movie-card catalog__movies-card"
     id="8"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/8"
     >
-      <img
-        height="175"
-        src="img/bohemian-rhapsody.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/8"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/bohemian-rhapsody.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         Bohemain Rhaapsody
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
   <article
     class="small-movie-card catalog__movies-card"
     id="9"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/9"
     >
-      <img
-        height="175"
-        src="img/we-need-to-talk-about-kevin.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/9"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/we-need-to-talk-about-kevin.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         We need to talk about Kevin
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
   <article
     class="small-movie-card catalog__movies-card"
     id="10"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/10"
     >
-      <img
-        height="175"
-        src="img/macbeth.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/10"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/macbeth.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         Macbeth
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
   <article
     class="small-movie-card catalog__movies-card"
     id="11"
   >
-    <div
-      class="small-movie-card__image"
+    <a
+      class="small-movie-card__link"
+      href="/films/11"
     >
-      <img
-        height="175"
-        src="img/bohemian-rhapsody.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      class="small-movie-card__title"
-    >
-      <a
-        class="small-movie-card__link"
-        href="/films/11"
+      <div
+        class="small-movie-card__image"
+      >
+        <img
+          height="175"
+          src="img/bohemian-rhapsody.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        class="small-movie-card__title"
       >
         Bohemain Rhaapsody
-      </a>
-    </h3>
+      </h3>
+    </a>
   </article>
 </div>
 `;

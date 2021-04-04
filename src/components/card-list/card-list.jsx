@@ -7,7 +7,7 @@ import {adapterFilmData} from '../../service/adapters';
 const CardList = ({filmsList}) => {
   const [activeCard, setActiveCard] = useState(null);
 
-  const onHoverHandler = React.useCallback((id) => {
+  const handleCardHover = React.useCallback((id) => {
     setActiveCard(id);
   }, [activeCard]);
 
@@ -15,7 +15,7 @@ const CardList = ({filmsList}) => {
     const {name, id, posterImage, previewVideoLink} = adapterFilmData(film);
     const isActive = id === activeCard;
 
-    return <Card key={`${name}_${idx}`} onHoverHandler={onHoverHandler} id={id} img={posterImage} previewVideolink={previewVideoLink} title={name} isActive={isActive} />;
+    return <Card key={`${name}_${idx}`} handleCardHover={handleCardHover} id={id} img={posterImage} previewVideolink={previewVideoLink} title={name} isActive={isActive} />;
   });
 
   return cards;
